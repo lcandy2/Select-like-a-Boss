@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "__MSG_extName__",
-    "version": "2021.9.14.3",
+    "version": "2021.9.15.3",
     "description": "__MSG_extDescription__",
     "author": "Dzianis Rusak (dzian`is)",
     "default_locale": "en",
@@ -11,7 +11,10 @@
         "128": "icons/O128.png"
     },
     "offline_enabled": true,
-    "options_page": "help.html",
+    "options_ui": {
+        "page": "help.html",
+        "open_in_tab": true
+    },
     "content_scripts": [{
         "matches": [
             "<all_urls>"
