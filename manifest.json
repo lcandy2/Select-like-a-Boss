@@ -1,44 +1,36 @@
 {
-	"manifest_version": 3,
-	"name": "__MSG_extName__",
-	"version": "2021.9.14",
-	"description": "__MSG_extDescription__",
-	"author": "Dzianis Rusak (dzian`is)",
-	"default_locale": "en",
-	"icons": {
-		"16": "icons/O16.png",
-		"48": "icons/O48.png",
-		"128": "icons/O128.png"
-	},
-	"offline_enabled": true,
-	"options_page": "help.html",
-	"content_scripts": [
-		{
-			"matches": [
-				"<all_urls>"
-			],
-			"all_frames": true,
-			"match_about_blank": true,
-			"run_at": "document_start",
-			"js": [
-				"includer.js"
-			]
-		}
-	],
-	"web_accessible_resources": [
-		{
-			"resources": [
-				"script.js"
-			],
-			"matches": [
-				"<all_urls>"
-			]
-		}
-	],
-	"background": {
-		"service_worker": "eventPage.js"
-	},
-	 "permissions": [
-		"tabs"
-  ]
+    "manifest_version": 2,
+    "name": "__MSG_extName__",
+    "version": "2021.9.14.2",
+    "description": "__MSG_extDescription__",
+    "author": "Dzianis Rusak (dzian`is)",
+    "default_locale": "en",
+    "icons": {
+        "16": "icons/O16.png",
+        "48": "icons/O48.png",
+        "128": "icons/O128.png"
+    },
+    "offline_enabled": true,
+    "options_page": "help.html",
+    "content_scripts": [{
+        "matches": [
+            "<all_urls>"
+        ],
+        "all_frames": true,
+        "match_about_blank": true,
+        "run_at": "document_start",
+        "js": [
+            "includer.js"
+        ]
+    }],
+    "web_accessible_resources": [
+        "script.js"
+    ],
+    "background": {
+        "scripts": ["eventPage.js"],
+        "persistent": false
+    },
+    "permissions": [
+        "tabs"
+    ]
 }
