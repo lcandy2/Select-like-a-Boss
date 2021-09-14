@@ -3,7 +3,7 @@
         "message": "肆意选择：Select like a Boss"
     },
     "extDescription": {
-        "message": "像平常那样轻易选择连接上的文字（就像在 Opera'12 那样）- Select like a Boss ;)"
+        "message": "像普通文字那样选择链接文字了（就像 Opera'12）- Select like a Boss ;)"
     },
     "helpTitle": {
         "message": "“肆意选择：Select like a Boss” 帮助页面"
@@ -15,7 +15,7 @@
         "message": "欢迎使用 “肆意选择：Select&nbsp;like&nbsp;a&nbsp;Boss” 扩展程序！"
     },
     "helpDescription": {
-        "message": "现在你可以像平常那样选择链接文本了（就像在 Opera'12 那样） - Select&nbsp;like&nbsp;a&nbsp;Boss&nbsp;;)"
+        "message": "现在你可以像普通文字那样选择链接文字了（就像 Opera'12） - Select&nbsp;like&nbsp;a&nbsp;Boss&nbsp;;)"
     },
     "helpSelect": {
         "message": "选择"
@@ -33,7 +33,7 @@
         "message": "用这个来试一下吧。"
     },
     "helpEnjoy": {
-        "message": "尽情享用吧！（别忘了分享给他人噢）"
+        "message": "尽情享用吧！（别忘记分享给他人噢）"
     },
     "helpDemoVideo": {
         "message": "演示视频"
@@ -45,6 +45,6 @@
         "message": "谢谢！"
     },
     "helpAttention": {
-        "message": "如果同样想在无痕模式下使用，别忘了在扩展页面中打开 [<b>在无痕模式下启用</b>]。"
+        "message": "如果同样想在无痕模式下使用该扩展，别忘记在扩展程序页面中打开 [<b>在无痕模式下启用</b>]。"
     }
 }
