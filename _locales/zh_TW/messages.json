@@ -1,0 +1,38 @@
+{
+    "extDescription": {
+        "message": "像平常那样轻易选择连接上的文字（就像在 Opera'12 那样）- Select like a Boss ;)"
+    },
+    "helpTitle": {
+        "message": "「Select like a Boss」幫助頁面"
+    },
+    "helpThanks": {
+        "message": "感謝使用「Select&nbsp;like&nbsp;a&nbsp;Boss」擴充功能！"
+    },
+    "helpDescription": {
+        "message": "現在您可以像普通文本一樣選擇連結的文本（如同 Opera'12）- Select&nbsp;like&nbsp;a&nbsp;Boss&nbsp;;)"
+    },
+    "helpSelect": {
+        "message": "選擇"
+    },
+    "helpSelectContent": {
+        "message": "像普通文本一樣"
+    },
+    "helpDrag": {
+        "message": "拖動"
+    },
+    "helpDragContent": {
+        "message": "向上或向下"
+    },
+    "helpTry": {
+        "message": "你可以用此嘗試。"
+    },
+    "helpEnjoy": {
+        "message": "請享用！（要與其他人共享擴展喔）"
+    },
+    "helpNotice": {
+        "message": "注意：有些連結可能無法選擇"
+    },
+    "helpAttention": {
+        "message": "如果您也想在無痕模式下使用擴展程序，請不要忘記啟用擴充功能頁面上的 [<b>允許在無痕模式中執行</b>]"
+    }
+}

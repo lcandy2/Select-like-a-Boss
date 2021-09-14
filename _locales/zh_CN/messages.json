@@ -1,0 +1,50 @@
+{
+    "extName": {
+        "message": "肆意选择：Select like a Boss"
+    },
+    "extDescription": {
+        "message": "像平常那样轻易选择连接上的文字（就像在 Opera'12 那样）- Select like a Boss ;)"
+    },
+    "helpTitle": {
+        "message": "“肆意选择：Select like a Boss” 帮助页面"
+    },
+    "helpHeading": {
+        "message": "<span style=text-indent:0px>肆&nbsp;意</span>&nbsp;选&nbsp;择"
+    },
+    "helpThanks": {
+        "message": "欢迎使用 “肆意选择：Select&nbsp;like&nbsp;a&nbsp;Boss” 扩展程序！"
+    },
+    "helpDescription": {
+        "message": "现在你可以像平常那样选择链接文本了（就像在 Opera'12 那样） - Select&nbsp;like&nbsp;a&nbsp;Boss&nbsp;;)"
+    },
+    "helpSelect": {
+        "message": "选择"
+    },
+    "helpSelectContent": {
+        "message": "和普通文字一样"
+    },
+    "helpDrag": {
+        "message": "拖拽"
+    },
+    "helpDragContent": {
+        "message": "向上或向下"
+    },
+    "helpTry": {
+        "message": "用这个来试一下吧。"
+    },
+    "helpEnjoy": {
+        "message": "尽情享用吧！（别忘了分享给他人噢）"
+    },
+    "helpDemoVideo": {
+        "message": "演示视频"
+    },
+    "helpNotice": {
+        "message": "注意：仍然有一些链接不能选择"
+    },
+    "helpThank": {
+        "message": "谢谢！"
+    },
+    "helpAttention": {
+        "message": "如果同样想在无痕模式下使用，别忘了在扩展页面中打开 [<b>在无痕模式下启用</b>]。"
+    }
+}
