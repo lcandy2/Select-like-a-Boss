@@ -1,7 +1,7 @@
-<h1 align="center"><img src="icons/O128.png" height="128"><br>Select like a Boss</span></h1>
+<h1 align="center"><img src="icons/new128.png" height="128"><br>Select like a Boss</span></h1>
 
 <p align="center"><strong>
-Select link's text just like a regular text (like in Opera'12 browser) - Select like a Boss ;)</strong></p>
+Select link's text just like a regular text - Select like a Boss ;)</strong></p>
 
 ## Get
 
@@ -27,6 +27,9 @@ Select link's text just like a regular text (like in Opera'12 browser) - Select 
 *Notice: some links can be unselectable*
 
 [Demo Video](https://www.youtube.com/watch?v=yuIxgUed_UA)
+
+## Note
+Due to Chrome Web Store and Microsoft Edge Add-ons policy, the icon and the description have been changed.
 
 ## License
 ```

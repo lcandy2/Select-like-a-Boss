@@ -1,6 +1,6 @@
-<h1 align="center"><img src="icons/O128.png" height="128"><br>肆意选择：Select like a Boss</span></h1>
+<h1 align="center"><img src="icons/new128.png" height="128"><br>肆意选择：Select like a Boss</span></h1>
 
-<p align="center"><strong>像普通文字那样选择链接文字（就像 Opera'12）- Select like a Boss ;)</strong></p>
+<p align="center"><strong>像普通文字那样选择链接文字 - Select like a Boss ;)</strong></p>
 
 ## 获取
 
@@ -26,6 +26,9 @@
 *注意：仍然有一些链接不能选择*
 
 [演示视频](https://www.youtube.com/watch?v=yuIxgUed_UA)
+
+## 注意
+由于 Chrome 网上应用店 和 Microsoft Edge 外接程序 的相关政策，重新设计了图标并更改了详细介绍。
 
 ## 许可
 ```

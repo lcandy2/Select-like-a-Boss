@@ -1,6 +1,6 @@
-<h1 align="center"><img src="icons/O128.png" height="128"><br>Select like a Boss</span></h1>
+<h1 align="center"><img src="icons/new128.png" height="128"><br>Select like a Boss</span></h1>
 
-<p align="center"><strong>同普通文字一樣選取連結的文字（如同 Opera'12）- Select like a Boss ;)</strong></p>
+<p align="center"><strong>同普通文字一樣選取連結的文字 - Select like a Boss ;)</strong></p>
 
 ## 取得
 
@@ -26,6 +26,9 @@
 *注意：有些連結可能無法選取*
 
 [Demo Video](https://www.youtube.com/watch?v=yuIxgUed_UA)
+
+## 注意
+出於 Chrome 綫上應用程式商店 和 Microsoft Edge 外掛程式 的條款，變更了描述和標誌。
 
 ## 許可證
 ```
