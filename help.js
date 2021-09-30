@@ -15,6 +15,7 @@ function i18n() {
     setLocalization('helpEmail');
     setLocalization('helpDonateBitcoin');
     setLocalization('helpAttention');
+    document.getElementsByTagName('img')[0].outerHTML = '<img src="icons/new128.png" height="128" width="128">';
 }
 
 function setLocalization(elementId) {

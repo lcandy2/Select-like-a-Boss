@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "__MSG_extName__",
-    "version": "2021.9.29",
+    "version": "2021.9.30",
     "description": "__MSG_extDescription__",
     "author": "Dzianis Rusak (dzian`is)",
     "default_locale": "en",
