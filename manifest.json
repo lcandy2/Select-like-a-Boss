@@ -1,16 +1,17 @@
 {
     "manifest_version": 2,
     "name": "__MSG_extName__",
-    "version": "2021.9.15.2",
+    "short_name": "Select bossily",
+    "version": "2022.4",
     "description": "__MSG_extDescription__",
     "author": "Dzianis Rusak (dzian`is)",
+    "homepage_url": "https://github.com/lcandy2/Select-like-a-Boss",
     "default_locale": "en",
     "icons": {
-        "16": "icons/O16.png",
-        "48": "icons/O48.png",
-        "128": "icons/O128.png"
+        "16": "icons/icon16.png",
+        "48": "icons/icon48.png",
+        "128": "icons/icon128.png"
     },
-    "offline_enabled": true,
     "options_ui": {
         "page": "help.html",
         "open_in_tab": true
@@ -21,19 +22,13 @@
         ],
         "all_frames": true,
         "match_about_blank": true,
-        "run_at": "document_start",
+        "run_at": "document_end",
         "js": [
-            "includer.js"
+            "content.js"
         ]
     }],
-    "web_accessible_resources": [
-        "script.js"
-    ],
     "background": {
-        "scripts": ["eventPage.js"],
+        "scripts": ["background.js"],
         "persistent": false
-    },
-    "permissions": [
-        "tabs"
-    ]
+    }
 }

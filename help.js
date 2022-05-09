@@ -23,4 +23,5 @@ function setLocalization(elementId) {
 
 document.addEventListener('DOMContentLoaded', () => {
     i18n();
+    document.getElementsByTagName('img')[0].outerHTML = '<img src="icons/icon128.png" height="128" width="128" alt="">';
 });
