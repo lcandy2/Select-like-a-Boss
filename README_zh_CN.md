@@ -1,4 +1,4 @@
-<h1 align="center"><img src="icons/icon128.png" height="128"><br>肆意选择：Select like a Boss</span></h1>
+<h1 align="center"><img src="icons/icon128.png" height="128"><br>肆意选择：Select like a Boss</h1>
 
 <p align="center"><strong>像普通文字那样选择链接文字 - Select like a Boss ;)</strong></p>
 

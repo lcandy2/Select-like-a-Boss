@@ -1,4 +1,4 @@
-<h1 align="center"><img src="icons/icon128.png" height="128"><br>Select like a Boss</span></h1>
+<h1 align="center"><img src="icons/icon128.png" height="128"><br>Select like a Boss</h1>
 
 <p align="center"><strong>Select link's text just like a regular text - Select like a Boss ;)</strong></p>
 

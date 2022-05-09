@@ -90,6 +90,12 @@ a.btn:hover{
 .size10{
 	font-size:10px;
 }
+.subtitle {
+	color: #000 !important;
+	font-size: 0.5em;
+}
+.subtitle::after> {border-bottom: 5px solid #000 ;
+}
 .first{
 	border:0;
 	font:700 42px 'Ubuntu Mono';
@@ -108,9 +114,9 @@ a.btn:hover{
 	content:'';
 	width:102%;
 	height:0;
-	border-bottom:1px solid #cf001e;
 	display:block;
 	position:relative;
+	border-bottom: 1px solid #cf001e;
 	bottom:4px;
 }
 .first span:after{
