@@ -95,11 +95,11 @@ a.btn:hover{
 	font:700 42px 'Ubuntu Mono';
 }
 .first p{
-	color:#b1001a;
+	color:#cf001e;
 	display:inline-block;
 }
 .first span{
-	background:#b1001a;
+	background:#cf001e;
 	color:#fff;
 	display:inline-block;
 }
@@ -108,7 +108,7 @@ a.btn:hover{
 	content:'';
 	width:102%;
 	height:0;
-	border-bottom:1px solid #b1001a;
+	border-bottom:1px solid #cf001e;
 	display:block;
 	position:relative;
 	bottom:4px;
@@ -121,7 +121,7 @@ a.btn:hover{
 }
 ::selection{
 	color:#fff;
-	background:#b1001a;
+	background:#cf001e;
 }
 @media only screen and (max-width:460px){
 	.first{ font-size:32px;	}
