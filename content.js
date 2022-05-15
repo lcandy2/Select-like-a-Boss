@@ -6,17 +6,18 @@
 const _bind = (evt, bind) => {
   if (bind === undefined) bind = true;
   if (evt.constructor !== Array) evt = [evt];
-  let method = bind ? 'addEventListener' : 'removeEventListener';
   for (let i = 0, len = evt.length; i < len; i++)
-    document[method](evt[i], handlers[evt[i]], true);
+    document[bind ? 'addEventListener' : 'removeEventListener'](evt[i], handlers[evt[i]], true);
 };
 const _unbind = (evt) => {
   _bind(evt, false);
 };
 function getCurrentAnchor(n) {
-  if (n.href) return n;
-  else if (!n.parentNode) return null;
-  else return getCurrentAnchor(n.parentNode);
+  do {
+    if (n.constructor === HTMLAnchorElement)
+      return n;
+  } while ((n = n.parentNode) && n !== document.body);
+  return null;
 }
 const stopEvent = (e) => {
   return e.preventDefault(), e.stopPropagation(), false;
@@ -36,15 +37,15 @@ const getRangeFromPoint = (x, y) => {
 const _letUserSelect = (function () {
   let n,
     styleElm = document.createElement('style');
-  let _data = 'data-Select-like-a-Boss',
-    _property = '-webkit-user-select:text!important;outline-width:0!important';
+  let _className = 'ext-Select-like-a-Boss',
+    _property = '-webkit-user-select:text!important;outline-width:0!important;';
   document.head.appendChild(styleElm);
-  styleElm.sheet.insertRule(`[${_data}],[${_data}] *{${_property}}`, 0);
+  styleElm.sheet.insertRule(`.${_className}{${_property}}`, 0);
   return (node) => {
     if (node) {
-      (n = node).setAttribute(_data, 1);
+      (n = node).classList.add(_className);
     } else if (n) {
-      n.removeAttribute(_data);
+      n.classList.remove(_className);
       n = null;
     }
   };
@@ -56,9 +57,11 @@ let cursor = {},
   needDetermineUserSelection,
   needCreateStartSelection,
   needStopClick,
-  userSelecting;
-const mouseDownHandler = (e) => {
-  if (e.which !== 1 || getCurrentAnchor(e.target) === null) return; // LMB on links only
+  userSelecting,
+  regexTDTH = /T[HD]/;
+const mainMouseDownHandler = (e) => {
+  let t = e.target
+  if (e.which !== 1 || getCurrentAnchor(t) === null) return // LMB on links only
   // resetVars
   needDetermineUserSelection = needCreateStartSelection = true;
   userSelecting = needStopClick = false;
@@ -67,11 +70,13 @@ const mouseDownHandler = (e) => {
   if (selection.type === 'Range') {
     let range = getRangeFromPoint(cursor.x, cursor.y);
     if (range && selection.getRangeAt(0).isPointInRange(range.startContainer, range.startOffset)
-    )
-      return;
+    ) return;
   }
   _letUserSelect();
-  let n = getCurrentAnchor(e.target);
+  if (t.nodeType === 3) t = t.parentNode
+  if (e.ctrlKey && regexTDTH.test(t.tagName) || e.altKey) return;
+  let n = getCurrentAnchor(t);
+  if (!n) if (t.constructor === HTMLTextAreaElement || t.constructor === HTMLCanvasElement || t.textContent === '') return;
   let rect = n.getBoundingClientRect();
   movable = { n: n, x: Math.round(rect.left), y: Math.round(rect.top), c: 0 };
   _bind(['mousemove', 'mouseup', 'dragend', 'dragstart']);
@@ -80,9 +85,18 @@ const mouseDownHandler = (e) => {
 // detection range setting
 let D = 3,
   K = 0.8;
+function getOutFromMoveHandler() {
+  _unbind(['mousemove', 'mouseup', 'dragend', 'dragstart', 'click']);
+  _letUserSelect();
+  selection.removeAllRanges();
+}
 const handlers = {
   mousemove: (e) => {
     if (movable) {
+      if (movable.n.constructor !== HTMLAnchorElement && movable.n.draggable) {
+        movable = null;
+        return getOutFromMoveHandler();
+      }
       if (movable.c++ < 12) {
         let rect = movable.n.getBoundingClientRect();
         if (
@@ -99,7 +113,7 @@ const handlers = {
     let x = e.clientX;
     let y = e.clientY;
     if (needCreateStartSelection) {
-      selection.removeAllRanges();
+      if (!e.altKey || !e.ctrlKey) selection.removeAllRanges();
       let correct = x > cursor.x ? -2 : 2;
       let range = getRangeFromPoint(x + correct, y);
       if (range) {
@@ -108,8 +122,8 @@ const handlers = {
       }
     }
     if (needDetermineUserSelection) {
-      let vx = Math.abs(cursor.x - x);
-      let vy = Math.abs(cursor.y - y);
+      let vx = Math.abs(cursor.x - x),
+        vy = Math.abs(cursor.y - y);
       userSelecting = vy === 0 || vx / vy > K;
       if (vx > D || vy > D) {
         needDetermineUserSelection = false;
@@ -146,4 +160,4 @@ const handlers = {
   },
 };
 
-document.addEventListener('mousedown', mouseDownHandler, true);
+document.addEventListener('mousedown', mainMouseDownHandler, true);
