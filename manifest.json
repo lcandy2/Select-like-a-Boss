@@ -1,36 +1,43 @@
 {
-    "manifest_version": 3,
-    "name": "__MSG_extName__",
-    "short_name": "Select bossily",
-    "version": "2022.4",
-    "version_name": "2022 Apr",
-    "description": "__MSG_extDescription__",
-    "author": "Dzianis Rusak (dzian`is)",
-    "homepage_url": "https://github.com/lcandy2/Select-like-a-Boss",
-    "default_locale": "en",
-    "icons": {
-        "16": "icons/icon16.png",
-        "48": "icons/icon48.png",
-        "128": "icons/icon128.png"
-    },
-    "offline_enabled": true,
-    "options_ui": {
-        "page": "help.html",
-        "open_in_tab": true
-    },
-    "content_scripts": [
-        {
-            "matches": ["<all_urls>"],
-            "all_frames": true,
-            "match_about_blank": true,
-            "match_origin_as_fallback": true,
-            "run_at": "document_end",
-            "js": [
-                "content.js"
-            ]
-        }
-    ],
-    "background": {
-        "service_worker": "background.js"
-    }
+"update_url": "https://clients2.google.com/service/update2/crx",
+
+	"manifest_version": 2
+
+	, "name": "Select like a Boss"
+	, "version": "2015.2.25"
+	, "description": "Select link's text just like a regular text (like in Opera'12 browser) - Select like a Boss ;)"
+	, "author": "Dzianis Rusak (dzian`is)"
+	, "icons": {
+		  "16": "icons/O16.png"
+		, "48": "icons/O48.png"
+		,"128": "icons/O128.png"
+	}
+	, "offline_enabled": true
+	, "options_page": "help.html"
+	, "content_scripts": [
+		{
+			  "matches": [ "\u003Call_urls>" ]
+			, "all_frames": true
+			, "match_about_blank": true
+			, "run_at": "document_start"
+			, "js": [ "includer.js" ]
+		}
+	]
+	, "web_accessible_resources": [
+		"script.js"
+	]
+	, "background": {
+		  "scripts": ["eventPage.js"]
+		, "persistent": false
+	}
+	, "page_action": {
+		  "default_icon": "icons/O48.png"
+		, "default_title": "Select like a Boss - Help page"
+	}
+	, "permissions": [
+		  "tabs"
+		, "storage"
+		, "\u003Call_urls>"
+	]
+	, "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAocc61P8D3oiADs4qNv7vgMdw9NO5udLiL9yfWm9yyWP3aC/kVAmOMu3prjnvABzbMndAzXZnBSdnB4dHR8x6uBY+IB1wr2a4G2/5ORQyJb9pFDNmgEtE4/qZwoNFbKP7PWBZLqDnPYdALOSfg16D6pERtjFuyyF3z7JAbniNYJSVIybIlNFwjrxfepJBPVfTNogSimYZDVXQs2xeZ5xNoIqnLGiTQPUaUJCMPEfdqh4PkTrLCJeQyq7qUJC426q0UJWQNeMa+qDCOZ7AJ6t5grBpn2r3AE4qeKwFsSBUEckVxb/P2XhPDAiIgVR0keO/8Hf0ADwGGP3UGKWLwBB42wIDAQAB"
 }

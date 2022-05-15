@@ -1,59 +1,54 @@
 <!doctype html>
 <html>
-
-<head>
+  <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title id="helpTitle">'Select like a Boss' Help page</title>
+    <title>'Select like a Boss' Help page</title>
     <link href="help.css" rel="stylesheet" type="text/css">
-    <script src="content.js"></script>
+    <script src="script.js"></script>
     <script src="help.js"></script>
-</head>
-
-<body>
+  </head>
+  <body>
 
     <section class="center first">
-        <img src="icons/O128.png" height="128" width="128" alt="">
-        <br>
-        <p id="helpHeading">Select <span id="helpHeadingSpan">like a Boss</span></p>
+      <img src="icons/O128.png" height="128" width="128">
+      <br>
+      <p>Select <span>like a Boss</span></p>
     </section>
 
-    <section class="shadow">
-        <h1 id="helpThanks">Thank you for using 'Select&nbsp;like&nbsp;a&nbsp;Boss' extension!</h1>
-        <p id="helpDescription">Now you can select link's text just like a regular text (like in Opera'12&nbsp;browser) - Select&nbsp;like&nbsp;a&nbsp;Boss&nbsp;;)</p>
-
-        <table>
-            <tr>
-                <td><b id="helpSelect">select</b></td>
-                <td>↔</td>
-                <td id="helpSelectContent">like a regular text</td>
-            </tr>
-            <tr>
-                <td><b id="helpDrag">drag</b></td>
-                <td>↕</td>
-                <td id="helpDragContent">up or down</td>
-            </tr>
-        </table>
-        <!--<ul>
-        <li>when you want to <b>select</b> ↔ just select it like a regular text;</li>
-        <li>when you want to <b>drag</b> ↕ drag it up or down.</li>
-      </ul>-->
-        <p class="center"><a href="#" id="helpTry">You can try with this.</a></p>
-        <br>
-        <p id="helpEnjoy">Enjoy! (and share the extension with other people)</p>
-        <p class="center"><br><a href="https://www.youtube.com/watch?v=yuIxgUed_UA" target="_blank" class="btn" id="helpDemoVideo">Demo Video</a></p>
-        <br>
-        <p class="size10"><i id="helpNotice">Notice: some links can be unselectable</i></p>
-        <br>
-        <p id="helpAttention">If you want to use the extension in the incognito mode too, do not forget to enable the checkbox
-            [<b>Allow&nbsp;in&nbsp;incognito</b>] on the extensions page</a>.</p>
+    <section class="attention">
+      <p>If you want to use the extension in the incognito mode too, do not forget to enable the checkbox [<b>Allow&nbsp;in&nbsp;incognito</b>] on the extensions page</a>.</p>
     </section>
 
     <section>
-        <p class="author"><a href="https://github.com/lcandy2">seril🍋(lcandy2)</a></p>
-        <p class="author">Based on a extension by Dzianis Rusak | <a href="./LICENSE">LICENSE</a></p>
+      <h1>Thank you for using 'Select&nbsp;like&nbsp;a&nbsp;Boss' extension!</h1>
+      <p>Now you can select link's text just like a regular text (like in Opera'12&nbsp;browser) - Select&nbsp;like&nbsp;a&nbsp;Boss&nbsp;;)</p>
+      <ul>
+        <li>when you want to <b>select</b> ↔ just select it like a regular text;</li>
+        <li>when you want to <b>drag</b> ↕ drag it up or down.</li>
+      </ul>
+      <p>Enjoy! (and share the extension with other people)</p>
+      <p><br></p>
+      <p class="size10"><i>Notice: some links can be unselectable.</i></p>
+      <p class="center"><a href="https://www.youtube.com/watch?v=yuIxgUed_UA" target="_blank" class="btn">Demo Video</a></p><!-- https://www.youtube.com/embed/yuIxgUed_UA -->
     </section>
 
-</body>
+    <section>
+      <p><a href="mailto:selectlikeaboss@gmail.com?subject=Select%20like%20a%20Boss" target="_blank" class="btn">E-mail me</a></p>
+      <p><a href="bitcoin:18n6MBwyS2FJgbmZs3ogKiTRcmufnR2zk?amount=0.02&message=donation" target="_blank" class="btn">Donate Bitcoins</a></p>
+      <p>Thank you!</p>
+      <p class="author">Dzianis Rusak</p>
+    </section>
 
+    <section>
+    	<h1>Options</h1>
+      <label>
+        <input type="checkbox" id="no-icon">Hide from address field.
+      </label>
+      <br>
+      <br>
+      <button id="save-button">Save</button> <span id="status"></span>
+      <script src="help.js"></script>
+    </section>
+    
+  </body>
 </html>
