@@ -46,7 +46,7 @@ npm install
 3. Build the extension:
 
 ```shell
-npm run build [--chrome --firefox]
+npm run build -- [--chrome --firefox]
 ```
 
 By default, running `npm run build` will generate the extension files in the `build` directory for both Chrome and Firefox.
@@ -58,7 +58,7 @@ To generate the files for a specific browser, use the appropriate flag:
 For example, to build the extension only for Chrome, run:
 
 ```shell
-npm run build --chrome
+npm run build -- --chrome
 ```
 
 
