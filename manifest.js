@@ -48,6 +48,7 @@ function generateManifestAndCopyFiles(outputFolderPath) {
   if (!fs.existsSync(outputFolderPath)) {
     fs.mkdirpSync(outputFolderPath, { recursive: true });
   }
+  fs.emptyDirSync(outputFolderPath);
   // Output file path
   const outputFilePath = path.join(outputFolderPath, 'manifest.json');
   // Convert manifestJson object to string and write fanifest.json file
