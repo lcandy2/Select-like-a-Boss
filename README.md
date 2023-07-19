@@ -1,12 +1,14 @@
-<h1 align="center"><img src="icons/icon128.png" height="128"><br>Select like a Boss</h1>
+<h1 align="center"><img src="./src/icons/icon128.png" height="128"><br>Select like a Boss</h1>
 
 <p align="center"><strong>Select link's text just like a regular text - Select like a Boss ;)</strong></p>
 
+Select like a Boss is a browser extension that allows you to easily select link text just like regular text, making it easier to copy. With this extension, you can quickly select and copy link text without the hassle of selecting the surrounding elements.
+
 ## Get
 
-[![Avaliable in the Chrome Web Store](https://storage.googleapis.com/chrome-gcs-uploader.appspot.com/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/UV4C4ybeBTsZt43U4xis.png)](https://chrome.google.com/webstore/detail/mbnnmpmcijodolgeejegcijdamonganh)
-[<img src='https://developer.microsoft.com/en-us/microsoft-store/badges/images/English_get-it-from-MS.png' alt='Get it from Microsoft' style='height: 58px;'/>](https://microsoftedge.microsoft.com/addons/detail/gapbnbmenclgbgngpidomkamcmgmpopm)
-[<img src='https://ffp4g1ylyit3jdyti1hqcvtb-wpengine.netdna-ssl.com/addons/files/2015/11/get-the-addon.png' alt='Get the add-on' style='height: 59px;'/>](https://addons.mozilla.org/firefox/addon/select-like-a-boss/)
+<a href="https://chrome.google.com/webstore/detail/mbnnmpmcijodolgeejegcijdamonganh" target="_blank"><img src="https://storage.googleapis.com/web-dev-uploads/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/HRs9MPufa1J1h5glNhut.png" style='height: 60px;' alt="Avaliable in the Chrome Web Store" /></a>
+<a href="https://microsoftedge.microsoft.com/addons/detail/gapbnbmenclgbgngpidomkamcmgmpopm" target="_blank"><img src='https://www.muggli.one/Fichiers/SVG/Edge%20add-on%20badge.svg' alt='Get it from Microsoft (Edge)' style='height: 59px;' /></a>
+<a href="https://addons.mozilla.org/firefox/addon/select-like-a-boss" target="_blank"><img src='https://blog.mozilla.org/addons/files/2015/11/get-the-addon.png' alt='Get the add-on for Firefox' style='height: 60px;' /></a>
 
 ## Features
 
@@ -23,33 +25,47 @@
     </tr>
 </table>
 
-*Notice: some links can be unselectable*
+- Seamlessly select link text just like regular text.
+- Simplify the process of copying link text.
+- Works on all web pages.
+
+*Note: some links can be unselectable*
 
 [Demo Video](https://www.youtube.com/watch?v=yuIxgUed_UA)
 
-## Note
-Due to Chrome Web Store and Microsoft Edge Add-ons policy, the icon and the description have been changed.
+## Build
+
+1. Clone this repository and navigate to the cloned directory:
+
+2. Install the required dependencies:
+
+```shell
+npm install
+```
+
+3. Build the extension:
+
+```shell
+npm run build [--chrome --firefox]
+```
+
+By default, running `npm run build` will generate the extension files in the `build` directory for both Chrome and Firefox.
+
+To generate the files for a specific browser, use the appropriate flag:
+- `--chrome` to generate the files for Chrome only.
+- `--firefox` to generate the files for Firefox only.
+
+For example, to build the extension only for Chrome, run:
+
+```shell
+npm run build --chrome
+```
+
+
+## Contributing
+
+Contributions are welcome! If you find a bug or have a suggestion for improvement, please open an issue or submit a pull request.
 
 ## License
-```
-Copyright (c) 2014-2015 Dzianis Rusak
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
-```
-> This extension is based on a removed extension of the same name (chromeWebStoreID:```mnbiiidkialopoakajjpeghipbpljffi```) by Dzianis Rusak.
+This project is licensed under the MPL-2.0 license. See the [LICENSE](LICENSE) file for details.
