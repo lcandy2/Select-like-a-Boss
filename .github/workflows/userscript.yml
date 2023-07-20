@@ -26,7 +26,7 @@ jobs:
       - name: Build UserScript
         run: |
           echo "Building UserScript..."
-        run: node userscript.js
+          node userscript.js
 
       - name: Push to repository
         run: |
