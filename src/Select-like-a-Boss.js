@@ -40,6 +40,7 @@ const handlers = {
     if (userSelecting) {
       justSelected = true;
       addEvent('click', handlers.click);
+      // console.log('add click event', userSelecting)
     }
     toggleUserSelect(e.target, false);
   },
@@ -50,7 +51,10 @@ const handlers = {
   click: (e) => {
     if (justSelected) {
       justSelected = false;
-      removeEvent('click', handlers.click);
+      setTimeout(() => {
+        removeEvent('click', handlers.click);
+        // console.log('remove click event', userSelecting)
+      }, 50);
       return stopEvent(e);
     }
   },
@@ -67,7 +71,7 @@ const toggleUserSelect = (node, enable = false) => {
 };
 
 document.addEventListener('mousedown', (e) => {
-  const excludeTags = e.target.closest('img, p, h1, h2, h3, h4, h5, h6, canvas, code, picture, svg, sub, strong, span, audio, video, em, blockquote, mark, del, ins, sup, abbr, object, embed, progress')
+  const excludeTags = e.target.closest('img, canvas, picture, svg, audio, video, object, progress, textarea')
   let excludeTagsCount = 1;
   if (excludeTags) excludeTagsCount = excludeTags.childElementCount;
   if (e.button !== 0 || excludeTagsCount === 0) { excludeTagsCount = 1; return; }

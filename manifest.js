@@ -9,9 +9,9 @@ const outputFolderPathChrome = outputFolderPathBase + '/chrome';
 const outputFolderPathFirefox = outputFolderPathBase + '/firefox';
 const outputToBoth = !isChrome && !isFirefox; // Whether to output to both folders
 const packageVersion = JSON.parse(fs.readFileSync('package.json')).version
-const [versionYear, versionMonth] = packageVersion.split(".");
+const [versionYear, versionMonth, versionSuffix] = packageVersion.split(".");
 const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-const packageVersionName = `${versionYear} ${months[parseInt(versionMonth) - 1]}`;
+const packageVersionName = `${versionYear} ${months[parseInt(versionMonth) - 1]} ${versionSuffix}`;
 
 const manifestJson = {
   manifest_version: 3,
