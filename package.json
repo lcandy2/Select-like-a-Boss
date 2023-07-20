@@ -1,6 +1,6 @@
 {
   "name": "Select-like-a-Boss",
-  "version": "2023.7.33",
+  "version": "2023.7.37",
   "scripts": {
     "build": "node userscript.js && node manifest.js"
   },
