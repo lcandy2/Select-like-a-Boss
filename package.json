@@ -2,7 +2,7 @@
   "name": "Select-like-a-Boss",
   "version": "2023.7.33",
   "scripts": {
-    "build": "node manifest.js"
+    "build": "node userscript.js && node manifest.js"
   },
   "dependencies": {
     "fs-extra": "^11.1.1",
