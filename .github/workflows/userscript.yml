@@ -3,23 +3,23 @@ name: Build UserScript
 on:
   push:
     branches:
-      - main  # 或者你希望运行脚本的分支名称
+      - main
 
 jobs:
-  run-script:
+  build-userscript:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
         with:
-          node-version: '20.2.0'  # 或者你希望使用的 Node.js 版本
+          node-version: '20'
 
       - name: Install dependencies
-        run: npm install  # 如果有依赖项需要安装的话
+        run: npm install
 
       - name: Build UserScript
         run: node userscript.js
