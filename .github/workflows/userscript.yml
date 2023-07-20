@@ -32,7 +32,7 @@ jobs:
         run: |
           echo "Pushing to repository..."
           git config --global user.name "GitHub Action"
-          git config --global user.email "45784494+lcandy2@users.noreply.github.com“
+          git config --global user.email "45784494+lcandy2@users.noreply.github.com"
           git add Select-like-a-Boss.user.js
           git commit -m "GitHub Action: Keep UserScript up-to-date"
           git push -u origin main
