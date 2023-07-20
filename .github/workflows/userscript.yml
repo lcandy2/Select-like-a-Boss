@@ -19,7 +19,16 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm install
+        run: |
+          echo "Installing dependencies..."
+          npm install
 
       - name: Build UserScript
+        run: |
+          echo "Building UserScript..."
         run: node userscript.js
+
+      - name: Push to repository
+        run: |
+          echo "Pushing to repository..."
+          git push -u origin main
