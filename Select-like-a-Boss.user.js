@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Select like a Boss
 // @namespace    https://github.com/lcandy2/Select-like-a-Boss
-// @version      2023.7.37
+// @version      2023.7.42
 // @license      MPL-2.0
 // @description  With this extension, you can easily select link text just like regular text, making it easier to copy. Just Select like a Boss! ;)
 // @author       seril🍋
@@ -25,7 +25,7 @@ const _unbind = (evt) => _bind(evt, false);
 
 function getCurrentAnchor(n) {
   while (n && n !== document.body) {
-    if (n instanceof HTMLAnchorElement) return n;
+    if (n instanceof HTMLAnchorElement || n instanceof HTMLButtonElement) return n;
     n = n.parentNode;
   }
   return null;
@@ -74,7 +74,8 @@ let cursor = {},
 
 const mainMouseDownHandler = (e) => {
   let t = e.target
-  if (e.button !== 0 || getCurrentAnchor(t) === null) return // LMB on links only
+  // console.log(t)
+  if (e.button !== 0) return; // LMB only
   // resetVars
   needDetermineUserSelection = needCreateStartSelection = true;
   userSelecting = needStopClick = false;
@@ -89,7 +90,8 @@ const mainMouseDownHandler = (e) => {
   if (t.nodeType === 3) t = t.parentNode
   if (e.ctrlKey && regexTDTH.test(t.tagName) || e.altKey) return;
   let n = getCurrentAnchor(t);
-  if (['HTMLTextAreaElement', 'HTMLCanvasElement'].includes(t.constructor.name) || t.textContent === '') return;
+  // console.log(n)
+  if (['HTMLTextAreaElement', 'HTMLCanvasElement'].includes(t.constructor.name) || t.textContent === '' || !n) return;
   let rect = n.getBoundingClientRect();
   movable = { n: n, x: Math.round(rect.left), y: Math.round(rect.top), c: 0 };
   _bind(['mousemove', 'mouseup', 'dragend', 'dragstart']);
