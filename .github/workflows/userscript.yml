@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-userscript:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,20 +19,13 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: |
-          echo "Installing dependencies..."
-          npm install
+        run: npm install
 
       - name: Build UserScript
-        run: |
-          echo "Building UserScript..."
-          node userscript.js
+        run: node userscript.js
 
-      - name: Push to repository
-        run: |
-          echo "Pushing to repository..."
-          git config --global user.name "GitHub Action"
-          git config --global user.email "45784494+lcandy2@users.noreply.github.com"
-          git add Select-like-a-Boss.user.js
-          git commit -m "GitHub Action: Keep UserScript up-to-date"
-          git push -u origin main
+      - name: Commit and push
+        uses: actions-js/push@v1.4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          message: 'action: Keep UserScript up-to-date'
