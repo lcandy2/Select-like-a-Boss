@@ -1,11 +1,11 @@
 // ==UserScript==
 // @name         Select like a Boss
 // @namespace    https://github.com/lcandy2/Select-like-a-Boss
-// @version      2023.7.42
+// @version      2024.3.16
 // @license      MPL-2.0
 // @description  With this extension, you can easily select link text just like regular text, making it easier to copy. Just Select like a Boss! ;)
 // @author       seril🍋
-// @match        *
+// @match        *://*/*
 // @run-at       document-end
 // @homepageURL  https://lcandy2.github.io/Select-like-a-Boss/
 // @icon         https://raw.githubusercontent.com/lcandy2/Select-like-a-Boss/main/src/icons/icon16.png
