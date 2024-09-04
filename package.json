@@ -1,5 +1,5 @@
 {
-  "name": "wxt-react-starter",
+  "name": "select-like-a-boss",
   "description": "manifest.json description",
   "private": true,
   "version": "0.0.0",
@@ -15,14 +15,23 @@
     "postinstall": "wxt prepare"
   },
   "dependencies": {
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "@webext-core/storage": "^1.2.0",
+    "framer-motion": "^11.3.31",
+    "jotai": "^2.9.3",
+    "lucide-react": "^0.438.0",
+    "react": "npm:@preact/compat",
+    "react-dom": "npm:@preact/compat",
+    "tailwind-merge": "^2.5.2"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@wxt-dev/module-react": "^1.1.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.44",
+    "tailwindcss": "^3.4.10",
     "typescript": "^5.5.4",
     "wxt": "^0.19.1"
-  }
+  },
+  "packageManager": "pnpm@9.9.0+sha512.60c18acd138bff695d339be6ad13f7e936eea6745660d4cc4a776d5247c540d0edee1a563695c183a66eb917ef88f2b4feb1fc25f32a7adcadc7aaf3438e99c1"
 }

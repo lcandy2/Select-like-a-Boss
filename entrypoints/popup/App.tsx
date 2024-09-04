@@ -1,34 +1,19 @@
-import { useState } from 'react';
-import reactLogo from '@/assets/react.svg';
-import wxtLogo from '/wxt.svg';
-import './App.css';
+import '@/components/tailwind.css'
+import { AnimatedLogo } from '@/components/animated-logo';
+import githubMark from '@/assets/github-mark.svg';
+import React from "react";
+import {LargeToggleButton} from "@/components/large-toggle-button.tsx";
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
-    <>
-      <div>
-        <a href="https://wxt.dev" target="_blank">
-          <img src={wxtLogo} className="logo" alt="WXT logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>WXT + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the WXT and React logos to learn more
-      </p>
-    </>
+    <div className='flex flex-col items-center w-full h-full'>
+      <header className='flex flex-row items-center gap-2 mb-6 mt-8'>
+        <AnimatedLogo className=''/>
+        <a href="https://github.com/lcandy2/Select-like-a-Boss" target="_blank"><img src={githubMark} className='size-5' alt="GitHub Repo"/></a>
+      </header>
+      <LargeToggleButton />
+    </div>
   );
 }
 
