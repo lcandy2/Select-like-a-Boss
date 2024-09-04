@@ -2,8 +2,14 @@
   "name": "select-like-a-boss",
   "description": "manifest.json description",
   "private": true,
-  "version": "0.0.0",
+  "version": "2024.9.1",
   "type": "module",
+  "author": {
+    "name": "甜檸Cirtron (lcandy2)",
+    "email": "vanilla#citrons.cc",
+    "url": "https://github.com/lcandy2"
+  },
+  "homepage": "https://github.com/lcandy2/Select-like-a-Boss",
   "scripts": {
     "dev": "wxt",
     "dev:firefox": "wxt -b firefox",
@@ -17,7 +23,6 @@
   "dependencies": {
     "@webext-core/storage": "^1.2.0",
     "framer-motion": "^11.3.31",
-    "jotai": "^2.9.3",
     "lucide-react": "^0.438.0",
     "react": "npm:@preact/compat",
     "react-dom": "npm:@preact/compat",

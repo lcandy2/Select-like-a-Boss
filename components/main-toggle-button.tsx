@@ -1,10 +1,20 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-export const LargeToggleButton = () => {
-  const [isOn, setIsOn] = useState(false);
+interface LargeToggleButtonProps {
+  isOn: boolean;
+  setIsOn: (isOn: boolean) => void;
+}
 
+export const MainToggleButton = ({ isOn, setIsOn }: LargeToggleButtonProps) => {
+  const [isReady, setIsReady] = useState(false);
   const toggleSwitch = () => setIsOn(!isOn);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsReady(true);
+    }, 100);
+  }, []);
 
   return (
       <div className="flex flex-col items-center justify-center">
@@ -25,7 +35,8 @@ export const LargeToggleButton = () => {
               transition={{
                 type: "spring",
                 stiffness: 700,
-                damping: 30
+                damping: 30,
+                duration: isReady ? 0.5 : 0
               }}
           />
         </motion.div>
