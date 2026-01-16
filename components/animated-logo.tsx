@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { MousePointer, Type } from 'lucide-react';
-import {twMerge} from "tailwind-merge";
 
 export const AnimatedLogo: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className, ...props }) => {
   const selectionControls = useAnimation();
@@ -47,32 +46,34 @@ export const AnimatedLogo: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ c
     animateSelection();
   }, [selectionControls, cursorControls]);
 
+  const rootClassName = ['slab-animated-logo', className].filter(Boolean).join(' ');
+
   return (
-      <div className={twMerge(className, "flex justify-center items-center h-fit")} {...props}>
-        <div className="relative">
-              <motion.div
-                  className="absolute top-0 left-0"
-                  animate={cursorControls}
-                  initial={{ x: 0, opacity: 1 }}
-              >
-                <MousePointer className="w-6 h-6 text-gray-600" />
-              </motion.div>
-          <div ref={textRef} className="text-2xl font-bold text-blue-600 relative underline">
-            <a href="https://select.citrons.cc" target='_blank'>Select like a Boss</a>
-            <motion.div
-                className="absolute bottom-0 left-0 h-full bg-blue-200 opacity-50"
-                initial={{ width: 0 }}
-                animate={selectionControls}
-            />
-                <motion.div
-                    className="absolute top-0 left-0 h-full w-0.5 bg-black"
-                    animate={cursorControls}
-                    initial={{ x: 0, opacity: 1 }}
-                >
-                  <Type className="w-4 h-4 text-black absolute -left-1.5 -top-5" />
-                </motion.div>
-          </div>
+    <div className={rootClassName} {...props}>
+      <div className="slab-animated-logo-inner">
+        <motion.div
+          className="slab-animated-logo-cursor"
+          animate={cursorControls}
+          initial={{ x: 0, opacity: 1 }}
+        >
+          <MousePointer className="slab-animated-logo-mouse" />
+        </motion.div>
+        <div ref={textRef} className="slab-animated-logo-text">
+          <a href="https://select.citrons.cc" target="_blank">Select like a Boss</a>
+          <motion.div
+            className="slab-animated-logo-selection"
+            initial={{ width: 0 }}
+            animate={selectionControls}
+          />
+          <motion.div
+            className="slab-animated-logo-caret"
+            animate={cursorControls}
+            initial={{ x: 0, opacity: 1 }}
+          >
+            <Type className="slab-animated-logo-type" />
+          </motion.div>
         </div>
       </div>
+    </div>
   );
 };

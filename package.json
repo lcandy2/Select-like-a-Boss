@@ -24,16 +24,12 @@
     "framer-motion": "^12.26.2",
     "lucide-react": "^0.562.0",
     "react": "npm:@preact/compat@^18.3.1",
-    "react-dom": "npm:@preact/compat@^18.3.1",
-    "tailwind-merge": "^3.4.0"
+    "react-dom": "npm:@preact/compat@^18.3.1"
   },
   "devDependencies": {
     "@types/react": "^19.2.8",
     "@types/react-dom": "^19.2.3",
     "@wxt-dev/module-react": "^1.1.5",
-    "autoprefixer": "^10.4.23",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3",
     "wxt": "^0.20.13"
   },
