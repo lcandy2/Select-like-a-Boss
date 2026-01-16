@@ -1,4 +1,5 @@
 import { createShadowRootUi } from '#imports';
+import iconUrl from '@/public/icon/icon.svg';
 
 type InspectUiController = {
   show: () => void;
@@ -23,6 +24,11 @@ export const createInspectUi = async (
       const host = document.createElement('div');
       host.className = 'slab-inspect-ui';
 
+      const icon = document.createElement('img');
+      icon.className = 'slab-inspect-ui__icon';
+      icon.src = iconUrl;
+      icon.alt = 'Select like a Boss';
+
       const label = document.createElement('span');
       label.className = 'slab-inspect-ui__label';
       label.textContent = 'Inspect mode active';
@@ -33,7 +39,7 @@ export const createInspectUi = async (
       button.textContent = 'End Inspect';
       button.addEventListener('click', onStop);
 
-      host.append(label, button);
+      host.append(icon, label, button);
       container.append(host);
       wrapper = host;
       wrapper.style.display = 'none';

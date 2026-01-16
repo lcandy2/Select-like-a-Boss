@@ -19,6 +19,14 @@
   color: var(--slab-primary);
 }
 
+.brand-icon {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
 .brand .subtitle {
   font-size: 0.85rem;
   color: var(--slab-muted);

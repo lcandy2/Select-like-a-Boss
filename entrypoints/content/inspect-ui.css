@@ -14,6 +14,12 @@
   font-family: "SF Mono", "SF Pro Text", "Segoe UI", "PingFang SC", "Noto Sans SC", system-ui, -apple-system, sans-serif;
 }
 
+.slab-inspect-ui__icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
 .slab-inspect-ui__label {
   font-weight: 600;
   color: #0056b3;

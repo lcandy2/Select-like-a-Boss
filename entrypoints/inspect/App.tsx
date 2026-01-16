@@ -16,6 +16,7 @@ import {
 } from '@phosphor-icons/react';
 import { storage } from '#imports';
 import './App.css';
+import iconUrl from '@/public/icon/icon.svg';
 
 type InspectLogEntry = {
   ts: number;
@@ -137,7 +138,10 @@ function App() {
     <div className="inspect-page">
       <header className="page-header">
         <div className="brand">
-          <div className="title">Select like a Boss - Inspect</div>
+          <div className="brand-title">
+            <img className="brand-icon" src={iconUrl} alt="Select like a Boss" />
+            <div className="title">Select like a Boss - Inspect</div>
+          </div>
           <div className="subtitle">Diagnostic view for selection issues.</div>
         </div>
         <div className="header-actions">
