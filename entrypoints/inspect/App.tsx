@@ -18,8 +18,14 @@ import {
 import { storage } from '#imports';
 import './App.css';
 
-const iconUrl = '/icon/icon.svg';
+declare const browser: any;
 
+const iconUrl =
+  typeof browser !== 'undefined' &&
+  browser.runtime &&
+  typeof browser.runtime.getURL === 'function'
+    ? browser.runtime.getURL('icon/icon.svg')
+    : 'icon/icon.svg';
 type InspectLogEntry = {
   ts: number;
   type: string;
