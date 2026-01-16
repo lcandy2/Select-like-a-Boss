@@ -4,7 +4,242 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Select like a Boss · Inspect Logs</title>
-    <link rel="stylesheet" href="./inspect.css" />
+    <style>
+      :root {
+        font-family: "Segoe UI", "PingFang SC", "Noto Sans SC", system-ui, -apple-system, sans-serif;
+        line-height: 1.5;
+        font-weight: 400;
+        color: #0f172a;
+        background: #f8fafc;
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+      }
+
+      .page-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px 24px;
+        border-bottom: 1px solid #e2e8f0;
+        background: #ffffff;
+      }
+
+      .brand .title {
+        font-size: 1.3rem;
+        font-weight: 700;
+      }
+
+      .brand .subtitle {
+        font-size: 0.9rem;
+        color: #64748b;
+      }
+
+      .header-actions {
+        display: flex;
+        gap: 12px;
+      }
+
+      button {
+        border: 1px solid #1f2937;
+        background: #ffffff;
+        color: #111827;
+        border-radius: 8px;
+        padding: 8px 14px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: #f1f5f9;
+      }
+
+      button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      main {
+        padding: 20px 24px 40px;
+      }
+
+      .summary {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .summary-card {
+        border: 1px solid #e2e8f0;
+        background: #ffffff;
+        border-radius: 10px;
+        padding: 12px 14px;
+        min-width: 160px;
+      }
+
+      .summary-card .label {
+        font-size: 0.8rem;
+        color: #64748b;
+      }
+
+      .summary-card .value {
+        font-size: 1.1rem;
+        font-weight: 700;
+        margin-top: 4px;
+      }
+
+      .sessions {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .session {
+        border: 1px solid #e2e8f0;
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 12px 16px;
+      }
+
+      .session[open] {
+        border-color: #94a3b8;
+      }
+
+      .session summary {
+        list-style: none;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .session summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .session-meta {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 8px 16px;
+        margin-top: 12px;
+        font-size: 0.85rem;
+        color: #475569;
+      }
+
+      .session-meta span {
+        color: #0f172a;
+        font-weight: 600;
+        margin-left: 6px;
+      }
+
+      .session-title {
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: #0f172a;
+      }
+
+      .session-url {
+        font-size: 0.85rem;
+        color: #475569;
+        word-break: break-all;
+      }
+
+      .status-chip {
+        display: inline-flex;
+        align-items: center;
+        border-radius: 999px;
+        padding: 2px 10px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+      }
+
+      .status-chip.completed {
+        color: #166534;
+        background: #dcfce7;
+      }
+
+      .status-chip.aborted {
+        color: #b91c1c;
+        background: #fee2e2;
+      }
+
+      .logs {
+        margin-top: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .log-row {
+        border-top: 1px dashed #e2e8f0;
+        padding-top: 10px;
+      }
+
+      .log-row:first-child {
+        border-top: none;
+        padding-top: 0;
+      }
+
+      .log-row .log-title {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #1e293b;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .log-row .log-time {
+        font-size: 0.75rem;
+        color: #64748b;
+      }
+
+      .log-row pre {
+        margin: 6px 0 0;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 8px 10px;
+        font-size: 0.8rem;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+
+      .empty {
+        border: 1px dashed #cbd5f5;
+        border-radius: 12px;
+        padding: 24px;
+        text-align: center;
+        color: #64748b;
+        background: #ffffff;
+      }
+
+      @media (max-width: 640px) {
+        .page-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+        }
+
+        .header-actions {
+          width: 100%;
+          justify-content: flex-start;
+          flex-wrap: wrap;
+        }
+      }
+    </style>
   </head>
   <body>
     <header class="page-header">
@@ -21,6 +256,156 @@
       <section class="summary" id="summary"></section>
       <section class="sessions" id="sessions"></section>
     </main>
-    <script type="module" src="./inspect.ts"></script>
+    <script>
+      const STORAGE_KEY = 'inspectLogs';
+      const summaryEl = document.getElementById('summary');
+      const sessionsEl = document.getElementById('sessions');
+      const refreshBtn = document.getElementById('refresh');
+      const clearBtn = document.getElementById('clear');
+      const storageLocal =
+        (globalThis.browser && globalThis.browser.storage && globalThis.browser.storage.local) ||
+        (globalThis.chrome && globalThis.chrome.storage && globalThis.chrome.storage.local);
+      const storageSync =
+        (globalThis.browser && globalThis.browser.storage) ||
+        (globalThis.chrome && globalThis.chrome.storage);
+
+      const formatTime = (ts) => {
+        if (!ts) return '-';
+        return new Date(ts).toLocaleString();
+      };
+
+      const toDuration = (start, end) => {
+        if (!start || !end || end < start) return '-';
+        const ms = end - start;
+        const seconds = Math.round(ms / 100) / 10;
+        return `${seconds}s`;
+      };
+
+      const renderSummary = (sessions) => {
+        summaryEl.innerHTML = '';
+        const totalLogs = sessions.reduce((sum, session) => sum + session.logs.length, 0);
+        const lastSession = sessions[0];
+        const items = [
+          { label: 'Sessions', value: String(sessions.length) },
+          { label: 'Total Logs', value: String(totalLogs) },
+          { label: 'Latest', value: lastSession ? formatTime(lastSession.startedAt) : '-' },
+        ];
+        for (const item of items) {
+          const card = document.createElement('div');
+          card.className = 'summary-card';
+          const label = document.createElement('div');
+          label.className = 'label';
+          label.textContent = item.label;
+          const value = document.createElement('div');
+          value.className = 'value';
+          value.textContent = item.value;
+          card.append(label, value);
+          summaryEl.append(card);
+        }
+      };
+
+      const renderSessions = (sessions) => {
+        sessionsEl.innerHTML = '';
+        if (sessions.length === 0) {
+          const empty = document.createElement('div');
+          empty.className = 'empty';
+          empty.textContent = 'No inspect sessions yet. Click “Inspect once” in the popup, then try selecting a link.';
+          sessionsEl.append(empty);
+          return;
+        }
+        for (const session of sessions) {
+          const details = document.createElement('details');
+          details.className = 'session';
+          const summary = document.createElement('summary');
+          const title = document.createElement('div');
+          title.className = 'session-title';
+          title.textContent = `${formatTime(session.startedAt)} · ${session.logs.length} logs`;
+          const statusChip = document.createElement('span');
+          statusChip.className = `status-chip ${session.status}`;
+          statusChip.textContent = session.status;
+          const url = document.createElement('div');
+          url.className = 'session-url';
+          url.textContent = session.url || '-';
+          title.append(' ', statusChip);
+          summary.append(title, url);
+
+          const meta = document.createElement('div');
+          meta.className = 'session-meta';
+          const metaItems = [
+            { label: 'Session ID', value: session.id },
+            { label: 'Duration', value: toDuration(session.startedAt, session.endedAt) },
+            { label: 'Status Reason', value: session.reason || '-' },
+          ];
+          for (const item of metaItems) {
+            const line = document.createElement('div');
+            line.textContent = `${item.label}: `;
+            const value = document.createElement('span');
+            value.textContent = item.value;
+            line.append(value);
+            meta.append(line);
+          }
+
+          const logs = document.createElement('div');
+          logs.className = 'logs';
+          for (const entry of session.logs) {
+            const row = document.createElement('div');
+            row.className = 'log-row';
+            const titleRow = document.createElement('div');
+            titleRow.className = 'log-title';
+            const label = document.createElement('span');
+            label.textContent = entry.type;
+            const time = document.createElement('span');
+            time.className = 'log-time';
+            time.textContent = formatTime(entry.ts);
+            titleRow.append(label, time);
+            row.append(titleRow);
+            if (entry.data && Object.keys(entry.data).length > 0) {
+              const pre = document.createElement('pre');
+              pre.textContent = JSON.stringify(entry.data, null, 2);
+              row.append(pre);
+            }
+            logs.append(row);
+          }
+
+          details.append(summary, meta, logs);
+          sessionsEl.append(details);
+        }
+      };
+
+      const loadSessions = async () => {
+        if (!storageLocal) return;
+        const result = await storageLocal.get(STORAGE_KEY);
+        const sessions = result && result[STORAGE_KEY] ? result[STORAGE_KEY] : [];
+        const sorted = sessions.slice().sort((a, b) => b.startedAt - a.startedAt);
+        renderSummary(sorted);
+        renderSessions(sorted);
+      };
+
+      refreshBtn.addEventListener('click', () => {
+        void loadSessions();
+      });
+
+      clearBtn.addEventListener('click', async () => {
+        if (!storageLocal) return;
+        clearBtn.disabled = true;
+        try {
+          await storageLocal.set({ [STORAGE_KEY]: [] });
+        } finally {
+          clearBtn.disabled = false;
+        }
+        await loadSessions();
+      });
+
+      if (storageSync && storageSync.onChanged) {
+        storageSync.onChanged.addListener((changes, areaName) => {
+          if (areaName !== 'local') return;
+          if (changes && changes[STORAGE_KEY]) {
+            void loadSessions();
+          }
+        });
+      }
+
+      void loadSessions();
+    </script>
   </body>
 </html>
