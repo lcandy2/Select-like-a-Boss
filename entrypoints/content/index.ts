@@ -1,5 +1,5 @@
 import './inspect-ui.css';
-import { createInspectUi } from '@/utils/inspect-ui';
+import { createInspectUi } from './inspect-ui';
 import { setCoreEnabled, setInspectUiController, startInspectOnce, stopInspect } from '@/utils/core';
 import { storage } from '#imports';
 
