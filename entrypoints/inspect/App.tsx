@@ -18,8 +18,6 @@ import {
 import { storage } from '#imports';
 import './App.css';
 
-declare const browser: any;
-
 const iconUrl =
   typeof browser !== 'undefined' &&
   browser.runtime &&
