@@ -1,4 +1,4 @@
-import { core } from '@/utils/core';
+import { core, startInspectOnce } from '@/utils/core';
 import { storage } from '#imports';
 
 export default defineContentScript({
@@ -9,5 +9,13 @@ export default defineContentScript({
     if (value === true || value === null) {
       core();
     }
+
+    browser.runtime.onMessage.addListener((message) => {
+      if (message?.type === 'SLAB_START_INSPECT') {
+        const started = startInspectOnce();
+        return Promise.resolve({ ok: started });
+      }
+      return undefined;
+    });
   },
 });
