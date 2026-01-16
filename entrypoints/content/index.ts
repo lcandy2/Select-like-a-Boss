@@ -1,4 +1,4 @@
-import { core, startInspectOnce } from '@/utils/core';
+import { setCoreEnabled, startInspectOnce } from '@/utils/core';
 import { storage } from '#imports';
 
 export default defineContentScript({
@@ -6,13 +6,15 @@ export default defineContentScript({
   async main() {
     const value = await storage.getItem<boolean>('local:isActivated');
     console.log(value);
-    if (value === true || value === null) {
-      core();
-    }
+    setCoreEnabled(value === true || value === null);
+
+    storage.watch<boolean>('local:isActivated', (nextValue) => {
+      setCoreEnabled(nextValue === true || nextValue === null);
+    });
 
     browser.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       if (message?.type === 'SLAB_START_INSPECT') {
-        core();
+        setCoreEnabled(true);
         const started = startInspectOnce();
         sendResponse({ ok: started });
         return true;
