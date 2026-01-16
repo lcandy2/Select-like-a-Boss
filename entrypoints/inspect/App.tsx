@@ -141,11 +141,16 @@ function App() {
           <div className="subtitle">Diagnostic view for selection issues.</div>
         </div>
         <div className="header-actions">
-          <button type="button" onClick={loadSessions}>
+          <button type="button" className="inspect-btn inspect-btn-secondary" onClick={loadSessions}>
             <ArrowClockwise size={16} weight="bold" />
             Refresh
           </button>
-          <button type="button" onClick={onClear} disabled={clearing}>
+          <button
+            type="button"
+            className="inspect-btn inspect-btn-danger"
+            onClick={onClear}
+            disabled={clearing}
+          >
             <Broom size={16} weight="bold" />
             {clearing ? 'Clearing…' : 'Clear Logs'}
           </button>
@@ -182,11 +187,20 @@ function App() {
           <div className="confirm-dialog-text">This cannot be undone.</div>
         </div>
         <div className="confirm-dialog-actions">
-          <button type="button" onClick={() => setConfirmOpen(false)}>
+          <button
+            type="button"
+            className="inspect-btn inspect-btn-secondary"
+            onClick={() => setConfirmOpen(false)}
+          >
             <XCircle size={16} weight="bold" />
             Cancel
           </button>
-          <button type="button" onClick={onConfirmClear} disabled={clearing}>
+          <button
+            type="button"
+            className="inspect-btn inspect-btn-danger"
+            onClick={onConfirmClear}
+            disabled={clearing}
+          >
             <Broom size={16} weight="bold" />
             {clearing ? 'Clearing…' : 'Clear'}
           </button>
@@ -231,6 +245,7 @@ function App() {
               <div className="session-actions">
                 <button
                   type="button"
+                  className="inspect-btn inspect-btn-secondary"
                   onClick={() => onCopy(session)}
                   disabled={session.logs.length === 0}
                 >

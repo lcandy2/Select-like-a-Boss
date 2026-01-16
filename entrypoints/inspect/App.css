@@ -12,6 +12,68 @@
   background: #f1f5fb;
 }
 
+.brand .title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--slab-primary);
+}
+
+.brand .subtitle {
+  font-size: 0.85rem;
+  color: var(--slab-muted);
+}
+
+.header-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.inspect-btn {
+  border: 1px solid var(--slab-grid);
+  background: #ffffff;
+  color: var(--slab-ink);
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.inspect-btn:hover {
+  background: #f8fafc;
+}
+
+.inspect-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.inspect-btn-secondary {
+  border-color: var(--slab-primary);
+  color: var(--slab-primary);
+}
+
+.inspect-btn-secondary:hover {
+  background: #eaf2ff;
+}
+
+.inspect-btn-danger {
+  border-color: #b91c1c;
+  color: #b91c1c;
+}
+
+.inspect-btn-danger:hover {
+  background: #fee2e2;
+}
+
+main {
+  padding: 16px 20px 28px;
+}
+
 .inspect-note {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -51,56 +113,6 @@
   gap: 8px;
   font-size: 0.8rem;
   color: var(--slab-ink);
-}
-
-.brand .title {
-  font-size: 1.2rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: var(--slab-primary);
-}
-
-.brand .subtitle {
-  font-size: 0.85rem;
-  color: var(--slab-muted);
-}
-
-.header-actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.header-actions button,
-.session-actions button,
-.confirm-dialog-actions button {
-  border: 1px solid var(--slab-primary);
-  background: #ffffff;
-  color: var(--slab-primary);
-  padding: 6px 12px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.header-actions button:hover,
-.session-actions button:hover,
-.confirm-dialog-actions button:hover {
-  background: #eaf2ff;
-}
-
-.header-actions button:disabled,
-.session-actions button:disabled,
-.confirm-dialog-actions button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-main {
-  padding: 16px 20px 28px;
 }
 
 .summary {
@@ -198,7 +210,7 @@ main {
 }
 
 .session-meta span {
-  color: #0f172a;
+  color: var(--slab-ink);
   font-weight: 600;
   margin-left: 6px;
 }

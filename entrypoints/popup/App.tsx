@@ -45,7 +45,7 @@ function App() {
           <div className="slab-help-body">
             <div className="slab-help-actions">
               <button
-                className="slab-inspect-button"
+                className="slab-btn slab-btn-primary slab-inspect-button"
                 type="button"
                 onClick={startInspect}
                 disabled={inspectState === 'sending'}
@@ -53,13 +53,18 @@ function App() {
                 <MagnifyingGlass size={16} weight="bold" />
                 {inspectState === 'sending' ? 'Sending…' : 'Start Inspect'}
               </button>
-              <a className="slab-inspect-link" href={inspectUrl} target="_blank" rel="noreferrer">
+              <a
+                className="slab-btn slab-btn-secondary slab-inspect-link"
+                href={inspectUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
                 <Eye size={16} weight="bold" />
                 View Inspect
               </a>
             </div>
             <a
-              className="slab-github-link"
+              className="slab-btn slab-btn-ghost slab-github-link"
               href="https://github.com/lcandy2/Select-like-a-Boss/issues"
               target="_blank"
               rel="noreferrer"

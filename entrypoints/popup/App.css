@@ -174,12 +174,10 @@
   gap: 8px;
 }
 
-.slab-inspect-button,
-.slab-inspect-link,
-.slab-github-link {
-  border: 1px solid var(--slab-primary);
+.slab-btn {
+  border: 1px solid var(--slab-grid);
   background: #ffffff;
-  color: var(--slab-primary);
+  color: var(--slab-ink);
   padding: 6px 8px;
   font-size: 0.72rem;
   font-weight: 600;
@@ -191,15 +189,37 @@
   white-space: nowrap;
 }
 
-.slab-inspect-button:hover,
-.slab-inspect-link:hover,
-.slab-github-link:hover {
+.slab-btn:hover {
+  background: #f8fafc;
+}
+
+.slab-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.slab-btn-primary {
+  border-color: var(--slab-primary);
+  background: var(--slab-primary);
+  color: #ffffff;
+}
+
+.slab-btn-primary:hover {
+  background: #1d4ed8;
+}
+
+.slab-btn-secondary {
+  border-color: var(--slab-primary);
+  color: var(--slab-primary);
+}
+
+.slab-btn-secondary:hover {
   background: #eaf2ff;
 }
 
-.slab-inspect-button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+.slab-btn-ghost {
+  border-color: var(--slab-grid);
+  color: var(--slab-ink);
 }
 
 .slab-github-link {
