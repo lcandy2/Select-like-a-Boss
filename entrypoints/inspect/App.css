@@ -46,6 +46,36 @@
   cursor: not-allowed;
 }
 
+.header-actions button + button {
+  white-space: nowrap;
+}
+
+.session-actions {
+  margin-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.session-actions button {
+  border: 1px solid #1f2937;
+  background: #ffffff;
+  color: #111827;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.session-actions button:hover {
+  background: #f1f5f9;
+}
+
+.session-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 main {
   padding: 20px 24px 40px;
 }

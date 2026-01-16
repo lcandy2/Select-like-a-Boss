@@ -35,6 +35,7 @@ const toDuration = (start?: number, end?: number): string => {
 function App() {
   const [sessions, setSessions] = useState<InspectSession[]>([]);
   const [clearing, setClearing] = useState(false);
+  const [copyState, setCopyState] = useState<Record<string, 'idle' | 'copied' | 'error'>>({});
   const [loaded, setLoaded] = useState(false);
 
   const loadSessions = async () => {
@@ -71,6 +72,31 @@ function App() {
       await storage.setItem(STORAGE_KEY, []);
     } finally {
       setClearing(false);
+    }
+  };
+
+  const onCopy = async (session: InspectSession) => {
+    try {
+      const payload = JSON.stringify(session.logs, null, 2);
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(payload);
+      } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = payload;
+        textarea.style.position = 'fixed';
+        textarea.style.opacity = '0';
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        document.execCommand('copy');
+        textarea.remove();
+      }
+      setCopyState((prev) => ({ ...prev, [session.id]: 'copied' }));
+      setTimeout(() => setCopyState((prev) => ({ ...prev, [session.id]: 'idle' })), 1500);
+    } catch (error) {
+      console.error('Failed to copy logs', error);
+      setCopyState((prev) => ({ ...prev, [session.id]: 'error' }));
+      setTimeout(() => setCopyState((prev) => ({ ...prev, [session.id]: 'idle' })), 1500);
     }
   };
 
@@ -123,6 +149,19 @@ function App() {
                 </div>
                 <div className="session-url">{session.url || '-'}</div>
               </summary>
+              <div className="session-actions">
+                <button
+                  type="button"
+                  onClick={() => onCopy(session)}
+                  disabled={session.logs.length === 0}
+                >
+                  {copyState[session.id] === 'copied'
+                    ? 'Copied!'
+                    : copyState[session.id] === 'error'
+                      ? 'Copy failed'
+                      : 'Copy logs'}
+                </button>
+              </div>
               <div className="session-meta">
                 <div>
                   Session ID:<span>{session.id}</span>
