@@ -59,7 +59,7 @@ export const AnimatedLogo: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ c
           <MousePointer className="slab-animated-logo-mouse" />
         </motion.div>
         <div ref={textRef} className="slab-animated-logo-text">
-          <a href="https://select.citrons.cc" target="_blank">Select like a Boss</a>
+          <a href="https://select.citrons.cc" target="_blank" rel="noopener noreferrer">Select like a Boss</a>
           <motion.div
             className="slab-animated-logo-selection"
             initial={{ width: 0 }}
