@@ -167,6 +167,17 @@
   color: #475569;
 }
 
+.slab-inspect-link {
+  color: #1d4ed8;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.slab-inspect-link:hover {
+  text-decoration: underline;
+}
+
 .slab-inspect-status {
   margin: 0;
   font-size: 0.85rem;

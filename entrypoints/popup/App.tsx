@@ -8,6 +8,7 @@ import { useLocalExtStorage } from '@/utils/use-local-ext-storage';
 function App() {
   const [isActivated, setIsActivated] = useLocalExtStorage('isActivated', true);
   const [inspectState, setInspectState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+  const inspectUrl = browser.runtime.getURL('inspect.html');
 
   const startInspect = async () => {
     setInspectState('sending');
@@ -43,6 +44,9 @@ function App() {
         >
           {inspectState === 'sending' ? 'Sending…' : 'Inspect once'}
         </button>
+        <a className="slab-inspect-link" href={inspectUrl} target="_blank" rel="noreferrer">
+          View inspect logs
+        </a>
         <p className="slab-inspect-hint">
           Click Inspect, then try selecting a link on the page. Logs are saved to local storage.
         </p>

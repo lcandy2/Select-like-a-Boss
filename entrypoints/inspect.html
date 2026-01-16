@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-Hans">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Select like a Boss · Inspect Logs</title>
+    <link rel="stylesheet" href="./inspect.css" />
+  </head>
+  <body>
+    <header class="page-header">
+      <div class="brand">
+        <div class="title">Inspect Logs</div>
+        <div class="subtitle">Select like a Boss</div>
+      </div>
+      <div class="header-actions">
+        <button id="refresh" type="button">Refresh</button>
+        <button id="clear" type="button">Clear Logs</button>
+      </div>
+    </header>
+    <main>
+      <section class="summary" id="summary"></section>
+      <section class="sessions" id="sessions"></section>
+    </main>
+    <script type="module" src="./inspect.ts"></script>
+  </body>
+</html>
