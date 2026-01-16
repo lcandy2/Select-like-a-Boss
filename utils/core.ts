@@ -458,17 +458,6 @@ export const core = (): void => {
   setCoreEnabled(true);
 };
 
-const cleanupSelection = (): void => {
-  _unbind(['mousemove', 'mouseup', 'dragend', 'dragstart', 'click']);
-  _letUserSelect();
-  selection?.removeAllRanges();
-  restoreMovableDrag();
-  movable = null;
-  selectionStart = null;
-  lastCaret = null;
-  currentAnchor = null;
-};
-
 export const setCoreEnabled = (enabled: boolean): void => {
   if (enabled) {
     if (coreInstalled) return;
@@ -479,5 +468,4 @@ export const setCoreEnabled = (enabled: boolean): void => {
   if (!coreInstalled) return;
   coreInstalled = false;
   document.removeEventListener('mousedown', mainMouseDownHandler, true);
-  cleanupSelection();
 };
