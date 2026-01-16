@@ -272,56 +272,64 @@ function App() {
           {!loaded && <div className="empty">Loading logs…</div>}
           {sortedSessions.map((session) => (
             <details key={session.id} className="session">
-              <summary>
-                <div className="session-title">
-                  {formatTime(session.startedAt)} · {session.logs.length} logs
-                  <span className={`status-chip ${session.status}`}>{session.status}</span>
+              <summary className="session-summary">
+                <div>
+                  <div className="session-title">
+                    {formatTime(session.startedAt)} · {session.logs.length} logs
+                    <span className={`status-chip ${session.status}`}>{session.status}</span>
+                  </div>
+                  <div className="session-url">
+                    <LinkSimple size={14} weight="bold" />
+                    <span>{session.url || '-'}</span>
+                  </div>
                 </div>
-                <div className="session-url">
-                  <LinkSimple size={14} weight="bold" />
-                  <span>{session.url || '-'}</span>
+                <div className="session-actions">
+                  <button
+                    type="button"
+                    className="inspect-btn inspect-btn-secondary"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      onCopy(session);
+                    }}
+                    disabled={session.logs.length === 0}
+                  >
+                    {copyState[session.id] === 'copied' ? (
+                      <CheckCircle size={16} weight="bold" />
+                    ) : copyState[session.id] === 'error' ? (
+                      <XCircle size={16} weight="bold" />
+                    ) : (
+                      <Copy size={16} weight="bold" />
+                    )}
+                    {copyState[session.id] === 'copied'
+                      ? 'Copied!'
+                      : copyState[session.id] === 'error'
+                        ? 'Copy failed'
+                        : 'Copy logs'}
+                  </button>
+                  <button
+                    type="button"
+                    className="inspect-btn inspect-btn-primary"
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      onExport(session);
+                    }}
+                    disabled={session.logs.length === 0}
+                  >
+                    {exportState[session.id] === 'done' ? (
+                      <CheckCircle size={16} weight="bold" />
+                    ) : exportState[session.id] === 'error' ? (
+                      <XCircle size={16} weight="bold" />
+                    ) : (
+                      <Export size={16} weight="bold" />
+                    )}
+                    {exportState[session.id] === 'done'
+                      ? 'Exported!'
+                      : exportState[session.id] === 'error'
+                        ? 'Export failed'
+                        : 'Export logs'}
+                  </button>
                 </div>
               </summary>
-              <div className="session-actions">
-                <button
-                  type="button"
-                  className="inspect-btn inspect-btn-secondary"
-                  onClick={() => onCopy(session)}
-                  disabled={session.logs.length === 0}
-                >
-                  {copyState[session.id] === 'copied' ? (
-                    <CheckCircle size={16} weight="bold" />
-                  ) : copyState[session.id] === 'error' ? (
-                    <XCircle size={16} weight="bold" />
-                  ) : (
-                    <Copy size={16} weight="bold" />
-                  )}
-                  {copyState[session.id] === 'copied'
-                    ? 'Copied!'
-                    : copyState[session.id] === 'error'
-                      ? 'Copy failed'
-                      : 'Copy logs'}
-                </button>
-                <button
-                  type="button"
-                  className="inspect-btn inspect-btn-primary"
-                  onClick={() => onExport(session)}
-                  disabled={session.logs.length === 0}
-                >
-                  {exportState[session.id] === 'done' ? (
-                    <CheckCircle size={16} weight="bold" />
-                  ) : exportState[session.id] === 'error' ? (
-                    <XCircle size={16} weight="bold" />
-                  ) : (
-                    <Export size={16} weight="bold" />
-                  )}
-                  {exportState[session.id] === 'done'
-                    ? 'Exported!'
-                    : exportState[session.id] === 'error'
-                      ? 'Export failed'
-                      : 'Export logs'}
-                </button>
-              </div>
               <div className="session-meta">
                 <div>
                   <Tag size={14} weight="bold" /> Session ID:<span>{session.id}</span>

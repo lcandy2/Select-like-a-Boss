@@ -196,6 +196,13 @@ main {
   display: none;
 }
 
+.session-summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+}
+
 .session-title {
   font-weight: 700;
   font-size: 0.9rem;
@@ -216,7 +223,6 @@ main {
 }
 
 .session-actions {
-  margin-top: 10px;
   display: flex;
   justify-content: flex-end;
   gap: 8px;
