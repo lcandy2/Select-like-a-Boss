@@ -188,8 +188,9 @@ main {
   list-style: none;
   cursor: pointer;
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
 }
 
 .session summary::-webkit-details-marker {
@@ -197,10 +198,18 @@ main {
 }
 
 .session-summary {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  display: flex;
   align-items: center;
   gap: 12px;
+  width: 100%;
+}
+
+.session-summary > div:first-child {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .session-title {
