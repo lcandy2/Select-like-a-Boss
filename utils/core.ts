@@ -19,7 +19,6 @@ type InspectSession = {
 const INSPECT_STORAGE_KEY = 'local:inspectLogs';
 const INSPECT_MAX_ENTRIES = 100;
 const INSPECT_MAX_SESSIONS = 10;
-const INSPECT_BANNER_ID = 'slab-inspect-banner';
 
 let coreInstalled = false;
 
@@ -31,71 +30,10 @@ let inspectState: {
   startedAt: number;
   logs: InspectLogEntry[];
 } | null = null;
-let inspectBanner: HTMLDivElement | null = null;
-let inspectBannerStyle: HTMLStyleElement | null = null;
+let inspectUiController: { show: () => void; hide: () => void } | null = null;
 
-const ensureInspectBannerStyle = () => {
-  if (inspectBannerStyle) return;
-  inspectBannerStyle = document.createElement('style');
-  inspectBannerStyle.textContent = `
-.${INSPECT_BANNER_ID} {
-  position: fixed;
-  top: 16px;
-  right: 16px;
-  z-index: 2147483647;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid #1f2937;
-  background: #ffffff;
-  color: #0f172a;
-  font-size: 13px;
-  font-family: "Segoe UI", "PingFang SC", "Noto Sans SC", system-ui, -apple-system, sans-serif;
-}
-.${INSPECT_BANNER_ID} button {
-  border: 1px solid #1f2937;
-  background: #111827;
-  color: #ffffff;
-  border-radius: 8px;
-  padding: 6px 10px;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-}
-.${INSPECT_BANNER_ID} button:hover {
-  background: #1f2937;
-}
-`;
-  document.head.appendChild(inspectBannerStyle);
-};
-
-const showInspectBanner = () => {
-  if (inspectBanner) return;
-  ensureInspectBannerStyle();
-  inspectBanner = document.createElement('div');
-  inspectBanner.className = INSPECT_BANNER_ID;
-  inspectBanner.id = INSPECT_BANNER_ID;
-
-  const label = document.createElement('span');
-  label.textContent = 'Inspect mode active';
-
-  const button = document.createElement('button');
-  button.type = 'button';
-  button.textContent = 'End Inspect';
-  button.addEventListener('click', () => {
-    stopInspect('manual-stop');
-  });
-
-  inspectBanner.append(label, button);
-  document.body.appendChild(inspectBanner);
-};
-
-const hideInspectBanner = () => {
-  if (!inspectBanner) return;
-  inspectBanner.remove();
-  inspectBanner = null;
+export const setInspectUiController = (controller: { show: () => void; hide: () => void }) => {
+  inspectUiController = controller;
 };
 
 const createSessionId = (): string => {
@@ -195,7 +133,7 @@ const finalizeInspect = (status: 'completed' | 'aborted', reason?: string): void
     logs: snapshot.logs,
   };
   inspectState = null;
-  hideInspectBanner();
+  inspectUiController?.hide();
   void (async () => {
     try {
       const existing = (await storage.getItem<InspectSession[]>(INSPECT_STORAGE_KEY)) ?? [];
@@ -221,7 +159,7 @@ export const startInspectOnce = (): boolean => {
     logs: [],
   };
   logInspect('inspect-start', { url: window.location.href });
-  showInspectBanner();
+  inspectUiController?.show();
   return true;
 };
 
