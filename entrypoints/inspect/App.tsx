@@ -1,5 +1,19 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { WarningCircle, MouseLeftClick } from '@phosphor-icons/react';
+import {
+  WarningCircle,
+  MouseLeftClick,
+  ArrowClockwise,
+  Broom,
+  Copy,
+  CheckCircle,
+  XCircle,
+  Clock,
+  LinkSimple,
+  ListChecks,
+  Database,
+  Timer,
+  Tag,
+} from '@phosphor-icons/react';
 import { storage } from '#imports';
 import './App.css';
 
@@ -128,9 +142,11 @@ function App() {
         </div>
         <div className="header-actions">
           <button type="button" onClick={loadSessions}>
+            <ArrowClockwise size={16} weight="bold" />
             Refresh
           </button>
           <button type="button" onClick={onClear} disabled={clearing}>
+            <Broom size={16} weight="bold" />
             {clearing ? 'Clearing…' : 'Clear Logs'}
           </button>
         </div>
@@ -167,9 +183,11 @@ function App() {
         </div>
         <div className="confirm-dialog-actions">
           <button type="button" onClick={() => setConfirmOpen(false)}>
+            <XCircle size={16} weight="bold" />
             Cancel
           </button>
           <button type="button" onClick={onConfirmClear} disabled={clearing}>
+            <Broom size={16} weight="bold" />
             {clearing ? 'Clearing…' : 'Clear'}
           </button>
         </div>
@@ -178,15 +196,15 @@ function App() {
       <main>
         <section className="summary">
           <div className="summary-card">
-            <div className="label">Sessions</div>
+            <div className="label"><ListChecks size={14} weight="bold" /> Sessions</div>
             <div className="value">{sortedSessions.length}</div>
           </div>
           <div className="summary-card">
-            <div className="label">Total Logs</div>
+            <div className="label"><Database size={14} weight="bold" /> Total Logs</div>
             <div className="value">{totalLogs}</div>
           </div>
           <div className="summary-card">
-            <div className="label">Latest</div>
+            <div className="label"><Clock size={14} weight="bold" /> Latest</div>
             <div className="value">{latest ? formatTime(latest.startedAt) : '-'}</div>
           </div>
         </section>
@@ -205,7 +223,10 @@ function App() {
                   {formatTime(session.startedAt)} · {session.logs.length} logs
                   <span className={`status-chip ${session.status}`}>{session.status}</span>
                 </div>
-                <div className="session-url">{session.url || '-'}</div>
+                <div className="session-url">
+                  <LinkSimple size={14} weight="bold" />
+                  <span>{session.url || '-'}</span>
+                </div>
               </summary>
               <div className="session-actions">
                 <button
@@ -213,6 +234,13 @@ function App() {
                   onClick={() => onCopy(session)}
                   disabled={session.logs.length === 0}
                 >
+                  {copyState[session.id] === 'copied' ? (
+                    <CheckCircle size={16} weight="bold" />
+                  ) : copyState[session.id] === 'error' ? (
+                    <XCircle size={16} weight="bold" />
+                  ) : (
+                    <Copy size={16} weight="bold" />
+                  )}
                   {copyState[session.id] === 'copied'
                     ? 'Copied!'
                     : copyState[session.id] === 'error'
@@ -222,13 +250,13 @@ function App() {
               </div>
               <div className="session-meta">
                 <div>
-                  Session ID:<span>{session.id}</span>
+                  <Tag size={14} weight="bold" /> Session ID:<span>{session.id}</span>
                 </div>
                 <div>
-                  Duration:<span>{toDuration(session.startedAt, session.endedAt)}</span>
+                  <Timer size={14} weight="bold" /> Duration:<span>{toDuration(session.startedAt, session.endedAt)}</span>
                 </div>
                 <div>
-                  Status Reason:<span>{session.reason ?? '-'}</span>
+                  <WarningCircle size={14} weight="bold" /> Status Reason:<span>{session.reason ?? '-'}</span>
                 </div>
               </div>
               <div className="logs">

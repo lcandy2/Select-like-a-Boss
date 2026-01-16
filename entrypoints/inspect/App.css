@@ -81,6 +81,9 @@
   font-size: 0.85rem;
   font-weight: 600;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .header-actions button:hover,
@@ -118,6 +121,9 @@ main {
   color: var(--slab-muted);
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .summary-card .value {
@@ -164,6 +170,9 @@ main {
   font-size: 0.8rem;
   color: var(--slab-muted);
   word-break: break-all;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
 }
 
 .session-actions {
@@ -179,6 +188,13 @@ main {
   margin-top: 12px;
   font-size: 0.8rem;
   color: var(--slab-muted);
+}
+
+.session-meta > div {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
 .session-meta span {
