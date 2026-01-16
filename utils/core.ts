@@ -1,3 +1,175 @@
+import { storage } from '#imports';
+
+type InspectLogEntry = {
+  ts: number;
+  type: string;
+  data?: Record<string, unknown>;
+};
+
+type InspectSession = {
+  id: string;
+  url: string;
+  startedAt: number;
+  endedAt: number;
+  status: 'completed' | 'aborted';
+  reason?: string;
+  logs: InspectLogEntry[];
+};
+
+const INSPECT_STORAGE_KEY = 'local:inspectLogs';
+const INSPECT_MAX_ENTRIES = 100;
+const INSPECT_MAX_SESSIONS = 10;
+
+let coreInstalled = false;
+
+let inspectState: {
+  active: boolean;
+  armed: boolean;
+  finalized: boolean;
+  sessionId: string;
+  startedAt: number;
+  logs: InspectLogEntry[];
+} | null = null;
+let inspectUiController: { show: () => void; hide: () => void } | null = null;
+
+export const setInspectUiController = (controller: { show: () => void; hide: () => void }) => {
+  inspectUiController = controller;
+};
+
+const createSessionId = (): string => {
+  if (typeof crypto !== 'undefined' && 'randomUUID' in crypto) {
+    return crypto.randomUUID();
+  }
+  return `${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
+};
+
+const getSelectionInfo = () => {
+  if (!selection) return null;
+  const text = selection.toString();
+  let rangeInfo: Record<string, unknown> | null = null;
+  if (selection.rangeCount > 0) {
+    const range = selection.getRangeAt(0);
+    rangeInfo = {
+      startOffset: range.startOffset,
+      endOffset: range.endOffset,
+      collapsed: range.collapsed,
+      startContainer: describeNode(range.startContainer),
+      endContainer: describeNode(range.endContainer),
+    };
+  }
+  return {
+    type: selection.type,
+    isCollapsed: selection.isCollapsed,
+    rangeCount: selection.rangeCount,
+    text: text.length > 120 ? `${text.slice(0, 120)}…` : text,
+    range: rangeInfo,
+  };
+};
+
+const safeComputedStyle = (element: Element) => {
+  try {
+    const style = getComputedStyle(element);
+    return {
+      userSelect: style.userSelect,
+      pointerEvents: style.pointerEvents,
+    };
+  } catch {
+    return null;
+  }
+};
+
+const describeNode = (node: Node | null) => {
+  if (!node) return null;
+  const element =
+    node.nodeType === Node.ELEMENT_NODE ? (node as Element) : node.parentElement;
+  if (!element) {
+    return {
+      nodeType: node.nodeType,
+      text: node.textContent ? node.textContent.slice(0, 120) : null,
+    };
+  }
+  const rect = element.getBoundingClientRect();
+  const isAnchor = element instanceof HTMLAnchorElement;
+  const anchor = isAnchor ? element : element.closest('a,button');
+  return {
+    nodeType: node.nodeType,
+    tagName: element.tagName,
+    id: element.id || null,
+    className: typeof element.className === 'string' ? element.className : null,
+    text: element.textContent ? element.textContent.trim().slice(0, 120) : null,
+    href: anchor instanceof HTMLAnchorElement ? anchor.href : null,
+    role: element.getAttribute('role'),
+    draggable: (element as HTMLElement).draggable ?? null,
+    isContentEditable: (element as HTMLElement).isContentEditable ?? null,
+    rect: {
+      x: Math.round(rect.x),
+      y: Math.round(rect.y),
+      w: Math.round(rect.width),
+      h: Math.round(rect.height),
+    },
+    styles: safeComputedStyle(element),
+  };
+};
+
+const logInspect = (type: string, data?: Record<string, unknown>): void => {
+  if (!inspectState?.active) return;
+  inspectState.logs.push({ ts: Date.now(), type, data });
+  if (inspectState.logs.length > INSPECT_MAX_ENTRIES) {
+    inspectState.logs.shift();
+  }
+};
+
+const finalizeInspect = (status: 'completed' | 'aborted', reason?: string): void => {
+  if (!inspectState?.active || inspectState.finalized) return;
+  const snapshot = inspectState;
+  snapshot.finalized = true;
+  const session: InspectSession = {
+    id: snapshot.sessionId,
+    url: window.location.href,
+    startedAt: snapshot.startedAt,
+    endedAt: Date.now(),
+    status,
+    reason,
+    logs: snapshot.logs,
+  };
+  inspectState = null;
+  inspectUiController?.hide();
+  void (async () => {
+    try {
+      const existing = (await storage.getItem<InspectSession[]>(INSPECT_STORAGE_KEY)) ?? [];
+      const next = existing.concat(session);
+      if (next.length > INSPECT_MAX_SESSIONS) {
+        next.splice(0, next.length - INSPECT_MAX_SESSIONS);
+      }
+      await storage.setItem(INSPECT_STORAGE_KEY, next);
+    } catch (error) {
+      console.error('Failed to persist inspect logs', error);
+    }
+  })();
+};
+
+export const startInspectOnce = (): boolean => {
+  if (inspectState?.active) return false;
+  inspectState = {
+    active: true,
+    armed: true,
+    finalized: false,
+    sessionId: createSessionId(),
+    startedAt: Date.now(),
+    logs: [],
+  };
+  logInspect('inspect-start', { url: window.location.href });
+  inspectUiController?.show();
+  return true;
+};
+
+export const stopInspect = (reason: string): boolean => {
+  if (!inspectState?.active) return false;
+  logInspect('abort', { reason });
+  finalizeInspect('aborted', reason);
+  return true;
+};
+
 const _bind = (evt: string | string[], bind: boolean = true): void => {
   const events: string[] = Array.isArray(evt) ? evt : [evt];
   const method: 'addEventListener' | 'removeEventListener' = bind ? 'addEventListener' : 'removeEventListener';
@@ -63,7 +235,20 @@ let cursor: { x: number; y: number } = { x: 0, y: 0 },
 const mainMouseDownHandler = (e: MouseEvent): void => {
   let t = e.target as Node;
   // console.log(t)
-  if (e.button !== 0) return; // LMB only
+  if (inspectState?.active && inspectState.armed) {
+    inspectState.armed = false;
+    logInspect('mousedown', {
+      button: e.button,
+      keys: { alt: e.altKey, ctrl: e.ctrlKey, shift: e.shiftKey, meta: e.metaKey },
+      cursor: { x: e.clientX, y: e.clientY },
+      target: describeNode(t),
+      selection: getSelectionInfo(),
+    });
+  }
+  if (e.button !== 0) {
+    logInspect('abort', { reason: 'non-left-button' });
+    return finalizeInspect('aborted', 'non-left-button');
+  } // LMB only
   // resetVars
   needDetermineUserSelection = needCreateStartSelection = true;
   userSelecting = needStopClick = false;
@@ -71,14 +256,28 @@ const mainMouseDownHandler = (e: MouseEvent): void => {
   cursor.y = e.clientY;
   if (selection?.type === 'Range') {
     let range = getRangeFromPoint(cursor.x, cursor.y);
-    if (range && (selection?.getRangeAt(0)?.isPointInRange(range.startContainer, range.startOffset) ?? false)) return;
+    if (range && (selection?.getRangeAt(0)?.isPointInRange(range.startContainer, range.startOffset) ?? false)) {
+      logInspect('abort', { reason: 'mousedown-inside-selection', range: describeNode(range.startContainer) });
+      return finalizeInspect('aborted', 'mousedown-inside-selection');
+    }
   }
   _letUserSelect();
   if (t.nodeType === 3) t = t.parentNode as Node;
-  if (e.ctrlKey && regexTDTH.test((t as Element).tagName) || e.altKey) return;
+  if (e.ctrlKey && regexTDTH.test((t as Element).tagName) || e.altKey) {
+    logInspect('abort', { reason: 'modifier-key-blocked', tag: (t as Element).tagName });
+    return finalizeInspect('aborted', 'modifier-key-blocked');
+  }
   let n = getCurrentAnchor(t);
   // console.log(n)
-  if (['HTMLTextAreaElement', 'HTMLCanvasElement'].includes(t.constructor.name) || t.textContent === '' || !n) return;
+  logInspect('anchor-check', { target: describeNode(t), anchor: describeNode(n) });
+  if (['HTMLTextAreaElement', 'HTMLCanvasElement'].includes(t.constructor.name) || t.textContent === '' || !n) {
+    logInspect('abort', {
+      reason: 'not-selectable-target',
+      target: describeNode(t),
+      anchor: describeNode(n),
+    });
+    return finalizeInspect('aborted', 'not-selectable-target');
+  }
   let rect = n.getBoundingClientRect();
   movable = { n: n, x: Math.round(rect.left), y: Math.round(rect.top), c: 0 };
   _bind(['mousemove', 'mouseup', 'dragend', 'dragstart']);
@@ -103,6 +302,7 @@ const handlers: Handlers = {
     if (movable) {
       if (movable.n.constructor !== HTMLAnchorElement && movable.n.draggable) {
         movable = null;
+        logInspect('abort', { reason: 'draggable-target' });
         return getOutFromMoveHandler();
       }
       if (movable.c++ < 12) {
@@ -114,12 +314,22 @@ const handlers: Handlers = {
           _unbind(['mousemove', 'mouseup', 'dragend', 'dragstart', 'click']);
           _letUserSelect();
           selection?.removeAllRanges();
+          logInspect('abort', { reason: 'target-moved', rect: { x: rect.left, y: rect.top } });
           return;
         }
       } else movable = null;
     }
     let x = e.clientX;
     let y = e.clientY;
+    logInspect('mousemove', {
+      cursor: { x, y },
+      state: {
+        needDetermineUserSelection,
+        needCreateStartSelection,
+        needStopClick,
+        userSelecting,
+      },
+    });
     if (needCreateStartSelection) {
       if (!e.altKey || !e.ctrlKey) selection?.removeAllRanges();
       let correct = x > cursor.x ? -2 : 2;
@@ -127,6 +337,7 @@ const handlers: Handlers = {
       if (range) {
         selection?.addRange(range);
         needCreateStartSelection = false;
+        logInspect('start-selection', { range: describeNode(range.startContainer) });
       }
     }
     if (needDetermineUserSelection) {
@@ -138,6 +349,7 @@ const handlers: Handlers = {
         if (userSelecting) {
           needStopClick = true;
           _bind('click');
+          logInspect('user-selection-detected', { vx, vy });
         }
       }
     }
@@ -148,24 +360,50 @@ const handlers: Handlers = {
   }) as EventListener,
   dragstart: ((e: DragEvent) => {
     _unbind('dragstart');
-    if (userSelecting) return stopEvent(e);
+    if (userSelecting) {
+      logInspect('dragstart', { selection: getSelectionInfo() });
+      return stopEvent(e);
+    }
   }) as EventListener,
   mouseup: ((e: MouseEvent) => {
     _unbind(['mousemove', 'mouseup', 'dragstart', 'dragend']);
     if (!userSelecting && needStopClick) needStopClick = false;
     setTimeout(() => _unbind('click'), 111);
     if (selection?.type !== 'Range') _letUserSelect();
+    logInspect('mouseup', {
+      button: e.button,
+      cursor: { x: e.clientX, y: e.clientY },
+      selection: getSelectionInfo(),
+    });
+    finalizeInspect('completed');
   }) as EventListener,
   dragend: () => {
     _unbind(['dragend', 'mousemove', 'mouseup']);
+    logInspect('dragend', { selection: getSelectionInfo() });
+    finalizeInspect('completed');
   },
   click: ((e: Event) => {
     _unbind('click');
     if (selection?.type !== 'Range') _letUserSelect();
-    if (needStopClick) return stopEvent(e);
+    if (needStopClick) {
+      logInspect('click-stopped', { selection: getSelectionInfo() });
+      return stopEvent(e);
+    }
   }) as EventListener,
 };
 
 export const core = (): void => {
-  document.addEventListener('mousedown', mainMouseDownHandler, true);
-}
+  setCoreEnabled(true);
+};
+
+export const setCoreEnabled = (enabled: boolean): void => {
+  if (enabled) {
+    if (coreInstalled) return;
+    coreInstalled = true;
+    document.addEventListener('mousedown', mainMouseDownHandler, true);
+    return;
+  }
+  if (!coreInstalled) return;
+  coreInstalled = false;
+  document.removeEventListener('mousedown', mainMouseDownHandler, true);
+};

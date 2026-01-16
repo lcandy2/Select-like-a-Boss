@@ -21,9 +21,7 @@
 
 body {
   margin: 0;
-  min-width: 320px;
   min-height: 100vh;
-  padding: 10px;
   background-color: #f8fafc;
   background-image:
     linear-gradient(var(--slab-grid) 1px, transparent 1px),
@@ -31,6 +29,6 @@ body {
   background-size: 24px 24px;
 }
 
-#root {
-  min-height: calc(100vh - 20px);
+button {
+  font-family: inherit;
 }

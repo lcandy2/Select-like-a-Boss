@@ -1,0 +1,40 @@
+.slab-inspect-ui {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 2147483647;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border: 1px solid #0056b3;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 12px;
+  font-family: "SF Mono", "SF Pro Text", "Segoe UI", "PingFang SC", "Noto Sans SC", system-ui, -apple-system, sans-serif;
+}
+
+.slab-inspect-ui__icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.slab-inspect-ui__label {
+  font-weight: 600;
+  color: #0056b3;
+}
+
+.slab-inspect-ui__button {
+  border: 1px solid #0056b3;
+  background: #0056b3;
+  color: #ffffff;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.slab-inspect-ui__button:hover {
+  background: #1d4ed8;
+}
