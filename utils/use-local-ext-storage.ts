@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
-import { localExtStorage } from '@webext-core/storage';
+import { storage } from '#imports';
 
 export function useLocalExtStorage<T>(key: string, initialValue: T) {
   const [storedValue, setStoredValue] = useState<T>(initialValue);
+  const storageKey = `local:${key}`;
 
   useEffect(() => {
     const loadStoredValue = async () => {
       try {
-        const value = await localExtStorage.getItem(key);
+        const value = await storage.getItem<T>(storageKey);
         setStoredValue(value !== null ? value : initialValue);
       } catch (error) {
         console.error(`Error loading value for key "${key}":`, error);
@@ -15,11 +16,11 @@ export function useLocalExtStorage<T>(key: string, initialValue: T) {
     };
 
     loadStoredValue();
-  }, [key, initialValue]);
+  }, [storageKey, initialValue]);
 
   const setValue = async (value: T) => {
     try {
-      await localExtStorage.setItem(key, value);
+      await storage.setItem(storageKey, value);
       setStoredValue(value);
     } catch (error) {
       console.error(`Error setting value for key "${key}":`, error);

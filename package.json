@@ -21,7 +21,6 @@
     "postinstall": "wxt prepare"
   },
   "dependencies": {
-    "@webext-core/storage": "^1.2.0",
     "framer-motion": "^12.26.2",
     "lucide-react": "^0.562.0",
     "react": "npm:@preact/compat@^18.3.1",

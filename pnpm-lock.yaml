@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@webext-core/storage':
-        specifier: ^1.2.0
-        version: 1.2.0
       framer-motion:
         specifier: ^12.26.2
         version: 12.26.2(@preact/compat@18.3.1(preact@10.23.2))(@preact/compat@18.3.1(preact@10.23.2))
@@ -556,9 +553,6 @@ packages:
 
   '@webext-core/match-patterns@1.0.3':
     resolution: {integrity: sha512-NY39ACqCxdKBmHgw361M9pfJma8e4AZo20w9AY+5ZjIj1W2dvXC8J31G5fjfOGbulW9w4WKpT8fPooi0mLkn9A==}
-
-  '@webext-core/storage@1.2.0':
-    resolution: {integrity: sha512-XI86HJUhugVdAQZLcj3EH/rZv08ByVn2riX3YI4HCJ86NOH5K3OwGi0ClFa/kq5U5hIVDMG6hwOBwgEgI2G5GQ==}
 
   '@wxt-dev/browser@0.1.32':
     resolution: {integrity: sha512-jvfSppeLzlH4sOkIvMBJoA1pKoI+U5gTkjDwMKdkTWh0P/fj+KDyze3lzo3S6372viCm8tXUKNez+VKyVz2ZDw==}
@@ -2309,10 +2303,6 @@ snapshots:
       is-potential-custom-element-name: 1.0.1
 
   '@webext-core/match-patterns@1.0.3': {}
-
-  '@webext-core/storage@1.2.0':
-    dependencies:
-      webextension-polyfill: 0.10.0
 
   '@wxt-dev/browser@0.1.32':
     dependencies:
