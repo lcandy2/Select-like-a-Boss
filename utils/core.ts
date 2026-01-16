@@ -17,7 +17,7 @@ type InspectSession = {
 };
 
 const INSPECT_STORAGE_KEY = 'local:inspectLogs';
-const INSPECT_MAX_ENTRIES = 200;
+const INSPECT_MAX_ENTRIES = 100;
 const INSPECT_MAX_SESSIONS = 10;
 const INSPECT_BANNER_ID = 'slab-inspect-banner';
 

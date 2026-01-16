@@ -28,7 +28,7 @@ export const MainToggleButton = ({ isOn, setIsOn }: LargeToggleButtonProps) => {
         <motion.div
           className="slab-toggle-thumb"
           animate={{
-            x: isOn ? 40 : 0,
+            x: isOn ? 64 : 0,
           }}
           transition={{
             type: 'spring',

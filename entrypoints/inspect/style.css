@@ -1,11 +1,13 @@
 :root {
-  font-family: "Segoe UI", "PingFang SC", "Noto Sans SC", system-ui, -apple-system, sans-serif;
+  font-family: "SF Mono", "SF Pro Text", "Segoe UI", "PingFang SC", "Noto Sans SC", system-ui, -apple-system, sans-serif;
   line-height: 1.5;
   font-weight: 400;
   color: #0f172a;
   background: #f8fafc;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
 }
 
 * {
@@ -15,6 +17,11 @@
 body {
   margin: 0;
   min-height: 100vh;
+  background-color: #f8fafc;
+  background-image:
+    linear-gradient(#e2e8f0 1px, transparent 1px),
+    linear-gradient(90deg, #e2e8f0 1px, transparent 1px);
+  background-size: 24px 24px;
 }
 
 button {

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { storage } from '#imports';
 import './App.css';
 
@@ -37,6 +37,8 @@ function App() {
   const [clearing, setClearing] = useState(false);
   const [copyState, setCopyState] = useState<Record<string, 'idle' | 'copied' | 'error'>>({});
   const [loaded, setLoaded] = useState(false);
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const dialogRef = useRef<HTMLDialogElement | null>(null);
 
   const loadSessions = async () => {
     const data = await storage.getItem<InspectSession[]>(STORAGE_KEY);
@@ -56,6 +58,17 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (confirmOpen && !dialog.open) {
+      dialog.showModal();
+    }
+    if (!confirmOpen && dialog.open) {
+      dialog.close();
+    }
+  }, [confirmOpen]);
+
   const sortedSessions = useMemo(() => {
     return sessions.slice().sort((a, b) => b.startedAt - a.startedAt);
   }, [sessions]);
@@ -67,12 +80,18 @@ function App() {
   const latest = sortedSessions[0];
 
   const onClear = async () => {
+    setConfirmOpen(true);
+  };
+
+  const onConfirmClear = async () => {
     setClearing(true);
     try {
       await storage.setItem(STORAGE_KEY, []);
     } finally {
       setClearing(false);
     }
+    setConfirmOpen(false);
+  };
   };
 
   const onCopy = async (session: InspectSession) => {
@@ -116,6 +135,28 @@ function App() {
           </button>
         </div>
       </header>
+
+      <dialog
+        ref={dialogRef}
+        className="confirm-dialog"
+        onCancel={(event) => {
+          event.preventDefault();
+          setConfirmOpen(false);
+        }}
+      >
+        <div className="confirm-dialog-body">
+          <div className="confirm-dialog-title">Clear all inspect logs?</div>
+          <div className="confirm-dialog-text">This cannot be undone.</div>
+        </div>
+        <div className="confirm-dialog-actions">
+          <button type="button" onClick={() => setConfirmOpen(false)}>
+            Cancel
+          </button>
+          <button type="button" onClick={onConfirmClear} disabled={clearing}>
+            {clearing ? 'Clearing…' : 'Clear'}
+          </button>
+        </div>
+      </dialog>
 
       <main>
         <section className="summary">

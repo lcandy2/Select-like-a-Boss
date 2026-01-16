@@ -34,8 +34,9 @@ function App() {
           <img src={githubMark} className="slab-github-icon" alt="GitHub Repo" />
         </a>
       </header>
-      <MainToggleButton isOn={isActivated} setIsOn={setIsActivated} />
-      <div className="slab-actions">
+      <div className="slab-body">
+        <MainToggleButton isOn={isActivated} setIsOn={setIsActivated} />
+        <div className="slab-actions">
         <button
           className="slab-inspect-button"
           type="button"
@@ -56,6 +57,7 @@ function App() {
         {inspectState === 'error' && (
           <p className="slab-inspect-status slab-inspect-status-error">Inspect failed to start.</p>
         )}
+        </div>
       </div>
     </div>
   );
