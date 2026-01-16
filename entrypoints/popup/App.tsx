@@ -19,7 +19,7 @@ function App() {
         return;
       }
       const response = await browser.tabs.sendMessage(tab.id, { type: 'SLAB_START_INSPECT' });
-      setInspectState(response?.ok ? 'sent' : 'error');
+      setInspectState(response?.ok === false ? 'error' : 'sent');
     } catch (error) {
       console.error('Failed to start inspect', error);
       setInspectState('error');

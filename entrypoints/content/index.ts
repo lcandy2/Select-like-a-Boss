@@ -10,10 +10,11 @@ export default defineContentScript({
       core();
     }
 
-    browser.runtime.onMessage.addListener((message) => {
+    browser.runtime.onMessage.addListener((message, _sender, sendResponse) => {
       if (message?.type === 'SLAB_START_INSPECT') {
         const started = startInspectOnce();
-        return Promise.resolve({ ok: started });
+        sendResponse({ ok: started });
+        return true;
       }
       return undefined;
     });
