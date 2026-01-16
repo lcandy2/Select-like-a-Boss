@@ -12,6 +12,47 @@
   background: #f1f5fb;
 }
 
+.inspect-note {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--slab-primary);
+  background: #ffffff;
+}
+
+.inspect-note-icon {
+  color: var(--slab-primary);
+  display: flex;
+  align-items: flex-start;
+}
+
+.inspect-note-body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.inspect-note-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--slab-ink);
+}
+
+.inspect-note-text {
+  font-size: 0.85rem;
+  color: var(--slab-muted);
+  max-width: 680px;
+}
+
+.inspect-note-steps {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--slab-ink);
+}
+
 .brand .title {
   font-size: 1.2rem;
   font-weight: 700;

@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@phosphor-icons/react':
+        specifier: ^2.1.10
+        version: 2.1.10(@preact/compat@18.3.1(preact@10.23.2))(@preact/compat@18.3.1(preact@10.23.2))
       framer-motion:
         specifier: ^12.26.2
         version: 12.26.2(@preact/compat@18.3.1(preact@10.23.2))(@preact/compat@18.3.1(preact@10.23.2))
@@ -343,6 +346,13 @@ packages:
   '@nodelib/fs.walk@1.2.8':
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
+
+  '@phosphor-icons/react@2.1.10':
+    resolution: {integrity: sha512-vt8Tvq8GLjheAZZYa+YG/pW7HDbov8El/MANW8pOAz4eGxrwhnbfrQZq0Cp4q8zBEu8NIhHdnr+r8thnfRSNYA==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>= 16.8'
+      react-dom: '>= 16.8'
 
   '@pnpm/config.env-replace@1.1.0':
     resolution: {integrity: sha512-htyl8TWnKL7K/ESFa1oW2UB5lVDxuF5DpM7tBi6Hu2LNL3mWkIzNLG6N4zoCUP1lCKNxWy/3iu8mS8MvToGd6w==}
@@ -2108,6 +2118,11 @@ snapshots:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.20.1
+
+  '@phosphor-icons/react@2.1.10(@preact/compat@18.3.1(preact@10.23.2))(@preact/compat@18.3.1(preact@10.23.2))':
+    dependencies:
+      react: '@preact/compat@18.3.1(preact@10.23.2)'
+      react-dom: '@preact/compat@18.3.1(preact@10.23.2)'
 
   '@pnpm/config.env-replace@1.1.0': {}
 

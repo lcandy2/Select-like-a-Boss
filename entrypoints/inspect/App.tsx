@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { WarningCircle, MouseLeftClick } from '@phosphor-icons/react';
 import { storage } from '#imports';
 import './App.css';
 
@@ -92,7 +93,6 @@ function App() {
     }
     setConfirmOpen(false);
   };
-  };
 
   const onCopy = async (session: InspectSession) => {
     try {
@@ -135,6 +135,23 @@ function App() {
           </button>
         </div>
       </header>
+
+      <section className="inspect-note">
+        <div className="inspect-note-icon">
+          <WarningCircle size={18} weight="bold" />
+        </div>
+        <div className="inspect-note-body">
+          <div className="inspect-note-title">When to use Inspect</div>
+          <div className="inspect-note-text">
+            Use Inspect when a site blocks or breaks link text selection, or when drag selection behaves
+            unexpectedly. It records selection events and element data for one attempt.
+          </div>
+          <div className="inspect-note-steps">
+            <MouseLeftClick size={16} weight="bold" />
+            <span>Click “Inspect once”, then drag to select a link on the target page.</span>
+          </div>
+        </div>
+      </section>
 
       <dialog
         ref={dialogRef}

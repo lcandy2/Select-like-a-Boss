@@ -21,6 +21,7 @@
     "postinstall": "wxt prepare"
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.1.10",
     "framer-motion": "^12.26.2",
     "lucide-react": "^0.562.0",
     "react": "npm:@preact/compat@^18.3.1",
