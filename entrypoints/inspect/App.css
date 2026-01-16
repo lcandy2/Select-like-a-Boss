@@ -1,8 +1,6 @@
 .inspect-page {
   min-height: 100vh;
-  border: 1px solid #0f172a;
-  background: #ffffff;
-  margin: 16px;
+  background: transparent;
 }
 
 .page-header {
@@ -10,18 +8,20 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 20px;
-  border-bottom: 1px solid #0f172a;
+  border-bottom: 1px solid var(--slab-primary);
+  background: #f1f5fb;
 }
 
 .brand .title {
   font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: 0.02em;
+  color: var(--slab-primary);
 }
 
 .brand .subtitle {
   font-size: 0.85rem;
-  color: #475569;
+  color: var(--slab-muted);
 }
 
 .header-actions {
@@ -33,9 +33,9 @@
 .header-actions button,
 .session-actions button,
 .confirm-dialog-actions button {
-  border: 1px solid #0f172a;
+  border: 1px solid var(--slab-primary);
   background: #ffffff;
-  color: #0f172a;
+  color: var(--slab-primary);
   padding: 6px 12px;
   font-size: 0.85rem;
   font-weight: 600;
@@ -45,7 +45,7 @@
 .header-actions button:hover,
 .session-actions button:hover,
 .confirm-dialog-actions button:hover {
-  background: #f1f5f9;
+  background: #eaf2ff;
 }
 
 .header-actions button:disabled,
@@ -67,14 +67,14 @@ main {
 }
 
 .summary-card {
-  border: 1px solid #0f172a;
+  border: 1px solid var(--slab-primary);
   padding: 10px 12px;
-  background: #ffffff;
+  background: var(--slab-panel);
 }
 
 .summary-card .label {
   font-size: 0.75rem;
-  color: #475569;
+  color: var(--slab-muted);
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
@@ -92,9 +92,9 @@ main {
 }
 
 .session {
-  border: 1px solid #0f172a;
+  border: 1px solid var(--slab-primary);
   padding: 12px 14px;
-  background: #ffffff;
+  background: var(--slab-panel);
 }
 
 .session summary {
@@ -112,7 +112,7 @@ main {
 .session-title {
   font-weight: 700;
   font-size: 0.9rem;
-  color: #0f172a;
+  color: var(--slab-ink);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -121,7 +121,7 @@ main {
 
 .session-url {
   font-size: 0.8rem;
-  color: #475569;
+  color: var(--slab-muted);
   word-break: break-all;
 }
 
@@ -137,7 +137,7 @@ main {
   gap: 8px 16px;
   margin-top: 12px;
   font-size: 0.8rem;
-  color: #475569;
+  color: var(--slab-muted);
 }
 
 .session-meta span {
@@ -154,7 +154,7 @@ main {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  border: 1px solid #0f172a;
+  border: 1px solid var(--slab-primary);
 }
 
 .status-chip.completed {
@@ -175,7 +175,7 @@ main {
 }
 
 .log-row {
-  border-top: 1px solid #0f172a;
+  border-top: 1px solid var(--slab-primary);
   padding-top: 10px;
 }
 
@@ -195,12 +195,12 @@ main {
 
 .log-time {
   font-size: 0.7rem;
-  color: #64748b;
+  color: var(--slab-muted);
 }
 
 .log-row pre {
   margin: 6px 0 0;
-  border: 1px solid #0f172a;
+  border: 1px solid var(--slab-primary);
   padding: 8px 10px;
   font-size: 0.75rem;
   white-space: pre-wrap;
@@ -209,17 +209,17 @@ main {
 }
 
 .empty {
-  border: 1px solid #0f172a;
+  border: 1px solid var(--slab-primary);
   padding: 20px;
   text-align: center;
-  color: #475569;
-  background: #ffffff;
+  color: var(--slab-muted);
+  background: var(--slab-panel);
 }
 
 .confirm-dialog {
-  border: 1px solid #0f172a;
+  border: 1px solid var(--slab-primary);
   padding: 16px 18px;
-  background: #ffffff;
+  background: var(--slab-panel);
   max-width: 320px;
 }
 
@@ -240,7 +240,7 @@ main {
 
 .confirm-dialog-text {
   font-size: 0.85rem;
-  color: #475569;
+  color: var(--slab-muted);
 }
 
 .confirm-dialog-actions {
@@ -251,10 +251,6 @@ main {
 }
 
 @media (max-width: 720px) {
-  .inspect-page {
-    margin: 10px;
-  }
-
   .page-header {
     flex-direction: column;
     align-items: flex-start;
