@@ -304,7 +304,7 @@ function App() {
                 </button>
                 <button
                   type="button"
-                  className="inspect-btn inspect-btn-secondary"
+                  className="inspect-btn inspect-btn-primary"
                   onClick={() => onExport(session)}
                   disabled={session.logs.length === 0}
                 >

@@ -79,6 +79,16 @@
   background: #eaf2ff;
 }
 
+.inspect-btn-primary {
+  border-color: var(--slab-primary);
+  background: var(--slab-primary);
+  color: #ffffff;
+}
+
+.inspect-btn-primary:hover {
+  background: #1d4ed8;
+}
+
 .inspect-btn-danger {
   border-color: #b91c1c;
   color: #b91c1c;
