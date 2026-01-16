@@ -18,7 +18,7 @@ import {
 import { storage } from '#imports';
 import './App.css';
 
-const iconUrl = '/icon/icon.svg?url';
+const iconUrl = '/icon/icon.svg';
 
 type InspectLogEntry = {
   ts: number;

@@ -1,6 +1,6 @@
 import { createShadowRootUi } from '#imports';
 
-const iconUrl = '/icon/icon.svg?url';
+const iconUrl = browser.runtime.getURL('icon/icon.svg');
 
 type InspectUiController = {
   show: () => void;
