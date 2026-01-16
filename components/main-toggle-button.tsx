@@ -22,7 +22,7 @@ export const MainToggleButton = ({ isOn, setIsOn }: LargeToggleButtonProps) => {
         className={`slab-toggle-track ${isOn ? 'slab-toggle-track-on' : 'slab-toggle-track-off'}`}
         onClick={toggleSwitch}
         animate={{
-          backgroundColor: isOn ? '#3B82F6' : '#D1D5DB',
+          backgroundColor: '#ffffff',
         }}
       >
         <motion.div

@@ -110,16 +110,17 @@
 .slab-toggle-track {
   display: flex;
   align-items: center;
-  width: 96px;
-  height: 32px;
+  width: 120px;
+  height: 28px;
   padding: 2px;
   border: 1px solid var(--slab-primary);
   cursor: pointer;
   background: #ffffff;
+  position: relative;
 }
 
 .slab-toggle-track-on {
-  background: #dbeafe;
+  background: #ffffff;
 }
 
 .slab-toggle-track-off {
@@ -127,8 +128,8 @@
 }
 
 .slab-toggle-thumb {
-  width: 28px;
-  height: 28px;
+  width: 56px;
+  height: 22px;
   background: var(--slab-primary);
 }
 
@@ -141,7 +142,6 @@
 
 .slab-help {
   width: 100%;
-  border: 1px solid var(--slab-primary);
   background: #ffffff;
 }
 
@@ -149,11 +149,12 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 12px;
+  padding: 10px 0;
   cursor: pointer;
   font-weight: 600;
   color: var(--slab-primary);
   list-style: none;
+  border-top: 1px solid var(--slab-grid);
 }
 
 .slab-help-summary::-webkit-details-marker {
@@ -164,8 +165,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 12px;
-  border-top: 1px solid var(--slab-primary);
+  padding: 10px 0 0;
 }
 
 .slab-help-actions {
