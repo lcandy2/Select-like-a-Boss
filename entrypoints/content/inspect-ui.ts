@@ -1,5 +1,6 @@
 import { createShadowRootUi } from '#imports';
-import iconUrl from '@/public/icon/icon.svg';
+
+const iconUrl = '/icon/icon.svg?url';
 
 type InspectUiController = {
   show: () => void;

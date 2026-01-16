@@ -17,7 +17,8 @@ import {
 } from '@phosphor-icons/react';
 import { storage } from '#imports';
 import './App.css';
-import iconUrl from '@/public/icon/icon.svg';
+
+const iconUrl = '/icon/icon.svg?url';
 
 type InspectLogEntry = {
   ts: number;
