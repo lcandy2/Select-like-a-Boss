@@ -13,6 +13,7 @@ import {
   Database,
   Timer,
   Tag,
+  Export,
 } from '@phosphor-icons/react';
 import { storage } from '#imports';
 import './App.css';
@@ -52,6 +53,7 @@ function App() {
   const [sessions, setSessions] = useState<InspectSession[]>([]);
   const [clearing, setClearing] = useState(false);
   const [copyState, setCopyState] = useState<Record<string, 'idle' | 'copied' | 'error'>>({});
+  const [exportState, setExportState] = useState<Record<string, 'idle' | 'done' | 'error'>>({});
   const [loaded, setLoaded] = useState(false);
   const [confirmOpen, setConfirmOpen] = useState(false);
   const dialogRef = useRef<HTMLDialogElement | null>(null);
@@ -131,6 +133,40 @@ function App() {
       console.error('Failed to copy logs', error);
       setCopyState((prev) => ({ ...prev, [session.id]: 'error' }));
       setTimeout(() => setCopyState((prev) => ({ ...prev, [session.id]: 'idle' })), 1500);
+    }
+  };
+
+  const onExport = (session: InspectSession) => {
+    try {
+      const payload = {
+        meta: {
+          version: 1,
+          exportedAt: new Date().toISOString(),
+          sessionId: session.id,
+          url: session.url,
+          startedAt: session.startedAt,
+          endedAt: session.endedAt,
+          status: session.status,
+          reason: session.reason ?? null,
+        },
+        logs: session.logs,
+      };
+      const json = JSON.stringify(payload, null, 2);
+      const blob = new Blob([json], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `slab-inspect-${session.id}.slablog`;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+      setExportState((prev) => ({ ...prev, [session.id]: 'done' }));
+      setTimeout(() => setExportState((prev) => ({ ...prev, [session.id]: 'idle' })), 1500);
+    } catch (error) {
+      console.error('Failed to export logs', error);
+      setExportState((prev) => ({ ...prev, [session.id]: 'error' }));
+      setTimeout(() => setExportState((prev) => ({ ...prev, [session.id]: 'idle' })), 1500);
     }
   };
 
@@ -265,6 +301,25 @@ function App() {
                     : copyState[session.id] === 'error'
                       ? 'Copy failed'
                       : 'Copy logs'}
+                </button>
+                <button
+                  type="button"
+                  className="inspect-btn inspect-btn-secondary"
+                  onClick={() => onExport(session)}
+                  disabled={session.logs.length === 0}
+                >
+                  {exportState[session.id] === 'done' ? (
+                    <CheckCircle size={16} weight="bold" />
+                  ) : exportState[session.id] === 'error' ? (
+                    <XCircle size={16} weight="bold" />
+                  ) : (
+                    <Export size={16} weight="bold" />
+                  )}
+                  {exportState[session.id] === 'done'
+                    ? 'Exported!'
+                    : exportState[session.id] === 'error'
+                      ? 'Export failed'
+                      : 'Export logs'}
                 </button>
               </div>
               <div className="session-meta">
