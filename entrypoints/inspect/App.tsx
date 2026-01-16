@@ -137,8 +137,8 @@ function App() {
     <div className="inspect-page">
       <header className="page-header">
         <div className="brand">
-          <div className="title">Inspect Logs</div>
-          <div className="subtitle">Select like a Boss</div>
+          <div className="title">Select like a Boss - Inspect</div>
+          <div className="subtitle">Diagnostic view for selection issues.</div>
         </div>
         <div className="header-actions">
           <button type="button" onClick={loadSessions}>
