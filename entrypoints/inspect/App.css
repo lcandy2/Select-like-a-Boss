@@ -12,6 +12,12 @@
   background: #f1f5fb;
 }
 
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .brand .title {
   font-size: 1.2rem;
   font-weight: 700;
@@ -22,9 +28,13 @@
 .brand-icon {
   width: 20px;
   height: 20px;
-  display: inline-block;
-  margin-right: 8px;
-  vertical-align: middle;
+  display: block;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
 }
 
 .brand .subtitle {

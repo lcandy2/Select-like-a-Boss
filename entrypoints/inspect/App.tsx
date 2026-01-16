@@ -138,11 +138,11 @@ function App() {
     <div className="inspect-page">
       <header className="page-header">
         <div className="brand">
-          <div className="brand-title">
-            <img className="brand-icon" src={iconUrl} alt="Select like a Boss" />
+          <img className="brand-icon" src={iconUrl} alt="Select like a Boss" />
+          <div className="brand-text">
             <div className="title">Select like a Boss - Inspect</div>
+            <div className="subtitle">Diagnostic view for selection issues.</div>
           </div>
-          <div className="subtitle">Diagnostic view for selection issues.</div>
         </div>
         <div className="header-actions">
           <button type="button" className="inspect-btn inspect-btn-secondary" onClick={loadSessions}>
