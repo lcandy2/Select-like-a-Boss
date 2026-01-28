@@ -6,7 +6,7 @@ Select like a Boss is a browser extension that allows you to easily select link 
 
 ## Get
 
-<a href="https://chrome.google.com/webstore/detail/mbnnmpmcijodolgeejegcijdamonganh" target="_blank"><img src="https://storage.googleapis.com/web-dev-uploads/image/WlD8wC6g8khYWPJUsQceQkhXSlv1/HRs9MPufa1J1h5glNhut.png" style='height: 60px;' alt="Avaliable in the Chrome Web Store" /></a>
+<a href="https://chrome.google.com/webstore/detail/mbnnmpmcijodolgeejegcijdamonganh" target="_blank"><img src="https://github.com/user-attachments/assets/20a6e44b-fd46-4e6c-8ea6-aad436035753" style='height: 60px;' alt="Avaliable in the Chrome Web Store" /></a>
 <a href="https://microsoftedge.microsoft.com/addons/detail/gapbnbmenclgbgngpidomkamcmgmpopm" target="_blank"><img src='https://www.muggli.one/Fichiers/SVG/Edge%20add-on%20badge.svg' alt='Get it from Microsoft (Edge)' style='height: 59px;' /></a>
 <a href="https://addons.mozilla.org/firefox/addon/select-like-a-boss" target="_blank"><img src='https://blog.mozilla.org/addons/files/2015/11/get-the-addon.png' alt='Get the add-on for Firefox' style='height: 60px;' /></a>
 
